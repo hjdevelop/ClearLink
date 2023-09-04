@@ -16,7 +16,7 @@
         android:drawableLeft="@drawable/baseline_keyboard_arrow_left_24"
         android:paddingLeft="0dp"
         android:paddingRight="0dp"
-        android:text="연락처"
+        android:text="@string/myPageActivity_contactList"
         android:textSize="16sp"
         android:textColor="@color/blue"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="프로필 이름"
+        android:text="@string/myPageActivity_userName"
         android:textSize="26sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -58,7 +58,7 @@
         android:drawablePadding="4dp"
         android:drawableTop="@drawable/message_size"
         android:drawableTint="@color/blue"
-        android:text="메시지"
+        android:text="@string/myPageActivity_message"
         android:textSize="13dp"
         android:textColor="@color/blue"
         app:layout_constraintEnd_toStartOf="@+id/btn_phonecall"
@@ -78,7 +78,7 @@
         android:drawablePadding="4dp"
         android:drawableTop="@drawable/phonecall_size"
         android:drawableTint="@color/blue"
-        android:text="통화"
+        android:text="@string/myPageActivity_phoneCall"
         android:textSize="13dp"
         android:textColor="@color/blue"
         app:layout_constraintEnd_toStartOf="@+id/btn_email"
@@ -99,7 +99,7 @@
         android:drawablePadding="4dp"
         android:drawableTop="@drawable/email_size"
         android:drawableTint="@color/blue"
-        android:text="Mail"
+        android:text="@string/myPageActivity_email1"
         android:textSize="13dp"
         android:textColor="@color/blue"
         app:layout_constraintEnd_toEndOf="parent"
@@ -138,7 +138,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="16dp"
-                    android:text="휴대전화"
+                    android:text="@string/myPageActivity_cellPhone"
                     android:textStyle="bold" />
 
                 <TextView
@@ -148,7 +148,7 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="50dp"
                     android:layout_marginBottom="16dp"
-                    android:text="010-1234-1234"
+                    android:text="@string/myPageActivity_userPhoneNumber"
                     android:textColor="@color/blue" />
 
             </androidx.cardview.widget.CardView>
@@ -170,7 +170,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="16dp"
-                    android:text="Email"
+                    android:text="@string/myPageActivity_email2"
                     android:textStyle="bold" />
 
                 <TextView
@@ -180,7 +180,7 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="50dp"
                     android:layout_marginBottom="16dp"
-                    android:text="team15@gmail.com"
+                    android:text="@string/myPageActivity_userEmailAddress"
                     android:textColor="@color/blue" />
 
             </androidx.cardview.widget.CardView>
@@ -203,7 +203,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="16dp"
-                    android:text="Event"
+                    android:text="@string/myPageActivity_event"
                     android:textStyle="bold" />
 
                 <TextView
@@ -214,7 +214,7 @@
                     android:layout_marginTop="50dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginBottom="16dp"
-                    android:text="이벤트 text를 넣을 공간"
+                    android:text="@string/myPageActivity_userEvent"
                     android:textColor="@color/blue" />
 
             </androidx.cardview.widget.CardView>

@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">ClearLink</string>
+
+    <!--fragment_contact_list.xml-->
+    <string name="fragmentContactList_title">ContactListFragment</string>
+
+    <!--fragment_my_page.xml-->
+    <string name="fragmentMyPage_title">MyPageFragment</string>
+
+    <!--mypage_activity.xml-->
+    <string name="myPageActivity_contactList">연락처</string>
+    <string name="myPageActivity_userName">이름</string>
+    <string name="myPageActivity_message">메시지</string>
+    <string name="myPageActivity_phoneCall">통화</string>
+    <string name="myPageActivity_email1">MAIL</string>
+    <string name="myPageActivity_cellPhone">휴대전화</string>
+    <string name="myPageActivity_userPhoneNumber">010-1234-1234</string>
+    <string name="myPageActivity_email2">Email</string>
+    <string name="myPageActivity_userEmailAddress">team15@gmail.com</string>
+    <string name="myPageActivity_event">Event</string>
+    <string name="myPageActivity_userEvent">이벤트 Text를 넣을 공간</string>
+
+    <!--toolbar_layout.xml-->
+    <string name="toolbarLayout_title">타이틀</string>
 </resources>

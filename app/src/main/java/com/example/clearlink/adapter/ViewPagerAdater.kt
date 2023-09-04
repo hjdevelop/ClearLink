@@ -3,7 +3,6 @@ package com.example.clearlink.adapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.companyname.clearlink.model.Tabs
 import com.example.clearlink.model.Tabs
 
 class ViewPagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {

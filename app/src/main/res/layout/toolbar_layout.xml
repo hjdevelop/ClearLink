@@ -17,7 +17,7 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/toolbar_title"
+        android:text="@string/toolbarLayout_title"
         android:layout_marginLeft="15dp"
         android:textColor="@color/black"
         android:textSize="18sp"
