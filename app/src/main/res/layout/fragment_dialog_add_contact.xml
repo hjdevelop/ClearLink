@@ -7,7 +7,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/add_contact_fragment_dialog_rounded_corner_dialog"
+        android:background="@drawable/ic_rounded_corner_dialog"
         android:orientation="vertical">
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -16,7 +16,7 @@
             android:layout_height="150dp"
             android:layout_gravity="center"
             android:layout_marginTop="40dp"
-            android:src="@drawable/add_contract_fragment_dialog_profileimage"
+            android:src="@drawable/ic_profileimage"
             app:civ_border_color="@color/blue"
             app:civ_border_overlay="true"
             app:civ_border_width="5dp" />
@@ -54,7 +54,7 @@
                 android:id="@+id/addContactFragmentDialog_name_editText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/add_contact_fragment_dialog_rouded_corner_edittext"
+                android:background="@drawable/ic_rouded_corner_edittext"
                 android:ems="10"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -80,7 +80,7 @@
                 android:id="@+id/addContactFragmentDialog_tel_editText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/add_contact_fragment_dialog_rouded_corner_edittext"
+                android:background="@drawable/ic_rouded_corner_edittext"
                 android:ems="10"
                 android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -106,7 +106,7 @@
                 android:id="@+id/addContactFragmentDialog_email_editText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/add_contact_fragment_dialog_rouded_corner_edittext"
+                android:background="@drawable/ic_rouded_corner_edittext"
                 android:ems="10"
                 android:inputType="textEmailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -132,7 +132,7 @@
                 android:id="@+id/addContactFragmentDialog_event_editText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/add_contact_fragment_dialog_rouded_corner_edittext"
+                android:background="@drawable/ic_rouded_corner_edittext"
                 android:ems="10"
                 android:inputType="datetime" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -151,7 +151,7 @@
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="120dp"
                 android:layout_weight="1"
-                android:background="@drawable/add_contact_fragment_dialog_confirm_button"
+                android:background="@drawable/ic_confirm_button"
                 android:text="@string/addContactFragmentDialog_cancel"
                 android:textColor="@color/white" />
 
@@ -161,7 +161,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="40dp"
                 android:layout_weight="1"
-                android:background="@drawable/add_contact_fragment_dialog_confirm_button"
+                android:background="@drawable/ic_confirm_button"
                 android:text="@string/addContactFragmentDialog_save"
                 android:textColor="@color/white" />
 
