@@ -22,4 +22,13 @@
 
     <!--toolbar_layout.xml-->
     <string name="toolbarLayout_title">타이틀</string>
+    
+    <!--fragment_dialog_add_contact.xml-->
+    <string name="addContactFragmentDialog_add">추가</string>
+    <string name="addContactFragmentDialog_name">이름</string>
+    <string name="addContactFragmentDialog_phoneNumber">전화번호</string>
+    <string name="addContactFragmentDialog_email">이메일</string>
+    <string name="addContactFragmentDialog_event">이벤트</string>
+    <string name="addContactFragmentDialog_cancel">취소</string>
+    <string name="addContactFragmentDialog_save">저장</string>
 </resources>
