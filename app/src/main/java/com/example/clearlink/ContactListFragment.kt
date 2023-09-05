@@ -1,25 +1,32 @@
 package com.example.clearlink
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
-import com.example.clearlink.adapter.ContactListAdapter
+import androidx.viewpager2.widget.ViewPager2
 import com.example.clearlink.adapter.ContactListViewPagerAdapter
 import com.example.clearlink.databinding.FragmentContactListBinding
 import com.example.clearlink.model.UserModel
 import com.google.android.material.tabs.TabLayoutMediator
 
-class ContactListFragment : Fragment() {
+interface ViewPagerProvider {
+    fun getViewPager(): ViewPager2
+}
 
-    val MyProfile = UserModel(R.drawable.sample_0, "이호식", "010-1234-1234", "team15@gmail.com", R.drawable.ic_star, false)
+class ContactListFragment : Fragment(), ViewPagerProvider {
+    private lateinit var viewPager: ViewPager2
 
-    companion object {
-        fun newInstance() = ContactListFragment()
+    // ViewPager2를 반환하는 getViewPager() 메서드 구현
+    override fun getViewPager(): ViewPager2 {
+        return viewPager
     }
+
+
+    val MyProfile = UserModel(R.drawable.sample_0, "이호식", "010-1234-1234", "team15@gmail.com","이벤트", R.drawable.ic_star, false)
 
     private var _binding: FragmentContactListBinding? = null
     private val binding get() = _binding!!

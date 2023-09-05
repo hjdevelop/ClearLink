@@ -175,7 +175,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/my_page_fragment_tv_useremail"
+                    android:id="@+id/contact_detail_fragment_tv_useremail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"

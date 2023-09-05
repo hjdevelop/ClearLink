@@ -3,6 +3,7 @@ package com.example.clearlink.adapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.example.clearlink.ContactDetailFragment
 import com.example.clearlink.ContactListFragment
 import com.example.clearlink.MyPageFragment
 import com.example.clearlink.model.Tabs
@@ -19,6 +20,7 @@ class ViewPagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapte
         fragments.add(
             Tabs(MyPageFragment(), "마이 페이지")
         )
+
     }
     override fun getItemCount(): Int {
         return fragments.size
@@ -31,4 +33,9 @@ class ViewPagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapte
     fun getTitle(position: Int): String {
         return fragments[position].title
     }
+
+    fun getFrag(position:Int):Fragment{
+        return fragments[position].fragment
+    }
+
 }

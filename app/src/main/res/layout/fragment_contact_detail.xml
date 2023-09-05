@@ -34,7 +34,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/my_page_fragment_name"
+        android:id="@+id/contact_detail_fragment_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -64,7 +64,7 @@
         app:layout_constraintEnd_toStartOf="@+id/my_page_fragment_btn_phonecall"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/my_page_fragment_name"
+        app:layout_constraintTop_toBottomOf="@+id/contact_detail_fragment_name"
         tools:ignore="SpeakableTextPresentCheck"/>
 
     <androidx.appcompat.widget.AppCompatButton
@@ -84,7 +84,7 @@
         app:layout_constraintEnd_toStartOf="@+id/my_page_fragment__btn_email"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/my_page_fragment_btn_message"
-        app:layout_constraintTop_toBottomOf="@+id/my_page_fragment_name"
+        app:layout_constraintTop_toBottomOf="@+id/contact_detail_fragment_name"
         tools:ignore="SpeakableTextPresentCheck"/>
 
     <androidx.appcompat.widget.AppCompatButton
@@ -105,7 +105,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/my_page_fragment_btn_phonecall"
-        app:layout_constraintTop_toBottomOf="@+id/my_page_fragment_name"
+        app:layout_constraintTop_toBottomOf="@+id/contact_detail_fragment_name"
         tools:ignore="SpeakableTextPresentCheck"/>
 
     <ScrollView
@@ -167,7 +167,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/my_page_fragment_cv_phone">
 
                 <TextView
-                    android:id="@+id/contact_detail_fragment_tv_text_email"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
@@ -176,7 +176,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/my_page_fragment_tv_useremail"
+                    android:id="@+id/contact_detail_fragment_tv_useremail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
@@ -202,7 +202,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/my_page_fragment_cv_email">
 
                 <TextView
-                    android:id="@+id/contact_detail_fragment_tv_text_event"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
@@ -211,7 +211,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/my_page_fragment_tv_userevent"
+                    android:id="@+id/contact_detail_fragment_tv_userevent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"

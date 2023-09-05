@@ -51,6 +51,7 @@ class ContactListInnerFavoritesFragment : Fragment() {
                     "즐겨찾기",
                     "010-1234-1234",
                     "team15@gmail.com",
+                    "event",
                     R.drawable.ic_full_start,
                     true
                 )

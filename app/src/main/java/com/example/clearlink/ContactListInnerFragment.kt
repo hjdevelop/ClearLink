@@ -1,5 +1,6 @@
 package com.example.clearlink
 
+
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,17 +9,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.clearlink.adapter.ContactListAdapter
-import com.example.clearlink.adapter.ContactListViewPagerAdapter
-import com.example.clearlink.databinding.FragmentContactListBinding
 import com.example.clearlink.databinding.FragmentContactListInnerBinding
 import com.example.clearlink.model.UserModel
-import com.google.android.material.tabs.TabLayoutMediator
 
 class ContactListInnerFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = ContactListInnerFragment()
-    }
 
     private var _binding: FragmentContactListInnerBinding? = null
     private val binding get() = _binding!!
@@ -36,27 +30,44 @@ class ContactListInnerFragment : Fragment() {
         return binding.root
     }
 
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         initView()
 
-        // for testww
-        val testList = arrayListOf<UserModel>()
-        for (i in 0 until 10) {
-            testList.add(
-                UserModel(
-                    R.drawable.sample_1,
-                    "이름",
-                    "01012341234",
-                    "email@gmail.com",
-                    R.drawable.ic_star,
-                    false
-                )
-            )
-        }
+        // 더미데이터 생성
+        val datalist = arrayListOf<UserModel>()
+        datalist.add( UserModel(R.drawable.sample_0,"김김김","010-0000-0000","aaa@aaa.com","a입니다.",R.drawable.ic_star,true))
+        datalist.add( UserModel(R.drawable.sample_1,"이이이","010-1111-1111","bbb@bbb.com","b입니다.",R.drawable.ic_star,false))
+        datalist.add( UserModel(R.drawable.sample_2,"박박박","010-2222-2222","ccc@ccc.com","c입니다.",R.drawable.ic_star,false))
+        datalist.add( UserModel(R.drawable.sample_3,"최최최","010-3333-3333","ddd@ddd.com","d입니다.",R.drawable.ic_star,true))
+        datalist.add( UserModel(R.drawable.sample_4,"정정정","010-4444-4444","eee@eee.com","e입니다.",R.drawable.ic_star,true))
+        datalist.add( UserModel(R.drawable.sample_5,"차차차","010-5555-5555","fff@fff.com","f입니다.",R.drawable.ic_star,false))
+        datalist.add( UserModel(R.drawable.sample_6,"조조조","010-6666-6666","ggg@ggg.com","g입니다.",R.drawable.ic_star,false))
+        datalist.add( UserModel(R.drawable.sample_7,"장장장","010-7777-7777","hhh@hhh.com","h입니다.",R.drawable.ic_star,true))
+        datalist.add( UserModel(R.drawable.sample_8,"추추추","010-8888-9999","yyy@yyy.com","y입니다.",R.drawable.ic_star,true))
+        datalist.add( UserModel(R.drawable.sample_9,"손손손","010-8888-9999","xxx@xxx.com","x입니다.",R.drawable.ic_star,false))
 
-        listAdapter.addItems(testList)
+        listAdapter.addItems(datalist)
+
+        listAdapter.itemClick = object : ContactListAdapter.ItemClick {
+            override fun onClick(view: View, position: Int) {
+                val args = Bundle()
+                args.putInt("ITEM_INDEX", position)
+                args.putParcelable("ITEM_OBJECT", datalist[position])
+
+                val contactDetailFragment = ContactDetailFragment()
+                ContactDetailFragment().arguments = args
+
+                // Fragment를 교체
+                val transaction = fragmentManager?.beginTransaction()
+                transaction?.replace(R.id.viewPager2, contactDetailFragment)
+                transaction?.addToBackStack(null)
+                transaction?.commit()
+            }
+        }
     }
 
     private fun initView() = with(binding) {
@@ -69,8 +80,9 @@ class ContactListInnerFragment : Fragment() {
                 LinearLayoutManager.VERTICAL
             )
         )
-
     }
+
+
 
     override fun onDestroyView() {
         _binding = null

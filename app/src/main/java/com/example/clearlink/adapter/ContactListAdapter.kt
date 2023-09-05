@@ -1,6 +1,7 @@
 package com.example.clearlink.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.clearlink.databinding.RvItemBinding
@@ -26,6 +27,12 @@ class ContactListAdapter : RecyclerView.Adapter<ContactListAdapter.ViewHolder>()
         }
     }
 
+    interface ItemClick {
+        fun onClick(view: View, position: Int)
+    }
+
+    var itemClick: ItemClick? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             RvItemBinding.inflate(LayoutInflater.from(parent.context))
@@ -33,6 +40,12 @@ class ContactListAdapter : RecyclerView.Adapter<ContactListAdapter.ViewHolder>()
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+
+        //클릭 이벤트 추가
+        holder.itemView.setOnClickListener {
+            itemClick?.onClick(it, position)
+        }
+
         val item = list[position]
         holder.bind(item)
     }

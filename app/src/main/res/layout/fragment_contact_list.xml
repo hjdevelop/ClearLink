@@ -115,7 +115,7 @@
 
 
 
-    <androidx.viewpager2.widget.ViewPager2
+        <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/contact_list_fragment_viewpager2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
