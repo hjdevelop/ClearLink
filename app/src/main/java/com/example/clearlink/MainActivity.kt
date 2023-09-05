@@ -1,8 +1,7 @@
-package com.companyname.clearlink
+package com.example.clearlink
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.clearlink.R
 import com.example.clearlink.adapter.ViewPagerAdapter
 import com.example.clearlink.databinding.ActivityMainBinding
 import com.google.android.material.tabs.TabLayoutMediator

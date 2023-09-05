@@ -7,9 +7,6 @@
     tools:context=".MainActivity"
     >
 
-    <!--  툴바  -->
-    <include layout="@layout/toolbar_layout" />
-
     <!--  뷰페이저  -->
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager2"
@@ -18,7 +15,7 @@
         app:layout_constraintBottom_toTopOf="@+id/tabLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+        app:layout_constraintTop_toTopOf="parent">
     </androidx.viewpager2.widget.ViewPager2>
 
     <!--  탭레이아웃  -->
