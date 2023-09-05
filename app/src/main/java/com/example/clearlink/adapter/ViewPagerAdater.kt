@@ -3,6 +3,8 @@ package com.example.clearlink.adapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.example.clearlink.ContactListFragment
+import com.example.clearlink.MyPageFragment
 import com.example.clearlink.model.Tabs
 
 class ViewPagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
@@ -12,10 +14,10 @@ class ViewPagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapte
     init {
         // 뷰페이저에 넣을 프래그먼트
         fragments.add(
-            Tabs(com.example.clearlink.ContactListFragment(), "연락처")
+            Tabs(ContactListFragment(), "연락처")
         )
         fragments.add(
-            Tabs(com.example.clearlink.MyPageFragment(), "마이 페이지")
+            Tabs(MyPageFragment(), "마이 페이지")
         )
     }
     override fun getItemCount(): Int {

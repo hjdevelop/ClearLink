@@ -24,11 +24,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         // Viewpager 어댑터 설정
         binding.viewPager2.adapter = viewPagerAdapter
-
-
 
         // 탭레이아웃, 뷰페이저 합치기
         TabLayoutMediator(binding.tabLayout, binding.viewPager2) { tab, position ->
