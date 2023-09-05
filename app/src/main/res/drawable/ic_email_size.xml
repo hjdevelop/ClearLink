@@ -2,7 +2,7 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:drawable="@drawable/message"
+        android:drawable="@drawable/ic_email"
         android:height="27dp"
         android:width="27dp"/>
 
