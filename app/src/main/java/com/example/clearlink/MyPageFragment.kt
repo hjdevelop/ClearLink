@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.setFragmentResultListener
 import com.example.clearlink.adapter.ContactListViewPagerAdapter
 import com.example.clearlink.databinding.FragmentContactListBinding
 import com.example.clearlink.databinding.FragmentMyPageBinding
@@ -13,8 +14,6 @@ import com.google.android.material.tabs.TabLayoutMediator
 import java.text.DecimalFormat
 
 class MyPageFragment : Fragment() {
-
-    val MyProfile = UserModel(R.drawable.sample_0, "이호식", "010-1234-1234", "team15@gmail.com", R.drawable.ic_star, false)
 
     companion object {
         fun newInstance() = MyPageFragment()
@@ -40,10 +39,17 @@ class MyPageFragment : Fragment() {
     }
 
     private fun initView() = with(binding) {
-        myPageFragmentProfileIcon.setImageResource(MyProfile.profileImg)
-        myPageFragmentName.text = MyProfile.name
-        myPageFragmentTvUserphone.text = MyProfile.phoneNumber
-        myPageFragmentTvUseremail.text = MyProfile.email
+//        myPageFragmentProfileIcon.setImageResource(MyProfile.profileImg)
+//        myPageFragmentName.text = MyProfile.name
+//        myPageFragmentTvUserphone.text = MyProfile.phoneNumber
+//        myPageFragmentTvUseremail.text = MyProfile.email
+
+
+        setFragmentResultListener("request") { key, bundle ->
+            bundle.getString("senderKey")?.let { value ->
+                myPageFragmentName.text = value
+            }
+        }
 
         myPageFragmentBtnContactlist.setOnClickListener {
 

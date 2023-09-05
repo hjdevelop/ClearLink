@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.fragment.app.setFragmentResult
 import com.example.clearlink.adapter.ContactListAdapter
 import com.example.clearlink.adapter.ContactListViewPagerAdapter
 import com.example.clearlink.databinding.FragmentContactListBinding
@@ -12,6 +14,8 @@ import com.example.clearlink.model.UserModel
 import com.google.android.material.tabs.TabLayoutMediator
 
 class ContactListFragment : Fragment() {
+
+    val MyProfile = UserModel(R.drawable.sample_0, "이호식", "010-1234-1234", "team15@gmail.com", R.drawable.ic_star, false)
 
     companion object {
         fun newInstance() = ContactListFragment()
@@ -34,6 +38,9 @@ class ContactListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initView()
+
+        val bundle = bundleOf("senderKey" to MyProfile.name)
+        setFragmentResult("request", bundle)
     }
 
     private fun initView() = with(binding) {
@@ -45,6 +52,8 @@ class ContactListFragment : Fragment() {
         TabLayoutMediator(contactListFragmentTablayout, contactListFragmentViewpager2) { tab, position ->
             tab.text = adapter.getTitle(position)
         }.attach()
+
+        contactListFragmentProfileName.text = MyProfile.name
     }
 
     override fun onDestroyView() {
