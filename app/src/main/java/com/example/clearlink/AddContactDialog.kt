@@ -28,8 +28,6 @@ class AddContactDialog : DialogFragment() {
     private val binding get() = _binding!!
     private var imageUri: Uri? = null
 
-    val dataList = mutableListOf<User>()
-
     val emailValidation = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
 
     override fun onCreateView(

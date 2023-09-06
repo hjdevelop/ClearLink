@@ -1,5 +1,6 @@
 package com.example.clearlink
 
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -47,7 +48,7 @@ class ContactListInnerFavoritesFragment : Fragment() {
         for (i in 0 until 3) {
             testList.add(
                 UserModel(
-                    R.drawable.sample_2,
+                    Uri.parse("android.resource://com.example.clearlink/${R.drawable.sample_0}"),
                     "즐겨찾기",
                     "010-1234-1234",
                     "team15@gmail.com",

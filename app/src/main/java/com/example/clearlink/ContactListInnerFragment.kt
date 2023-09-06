@@ -43,19 +43,7 @@ class ContactListInnerFragment : Fragment() {
 
         // for testww
         val testList = arrayListOf<UserModel>()
-        for (i in 0 until 10) {
-            testList.add(
-                UserModel(
-                    R.drawable.sample_1,
-                    "이름",
-                    "01012341234",
-                    "email@gmail.com",
-                    R.drawable.ic_star,
-                    false,
-                    "event text"
-                )
-            )
-        }
+
 
         listAdapter.addItems(testList)
     }
