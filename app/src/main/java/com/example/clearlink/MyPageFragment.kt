@@ -39,20 +39,20 @@ class MyPageFragment : Fragment() {
     }
 
     private fun initView() = with(binding) {
-//        myPageFragmentProfileIcon.setImageResource(MyProfile.profileImg)
-//        myPageFragmentName.text = MyProfile.name
-//        myPageFragmentTvUserphone.text = MyProfile.phoneNumber
-//        myPageFragmentTvUseremail.text = MyProfile.email
 
-
-        setFragmentResultListener("request") { key, bundle ->
-            bundle.getString("senderKey")?.let { value ->
-                myPageFragmentName.text = value
+        setFragmentResultListener("mypage") { key, bundle ->
+            bundle.getParcelable<UserModel>("senderMyProfile")?.let { myProfile ->
+                myPageFragmentProfileIcon.setImageResource(myProfile.profileImg)
+                myPageFragmentName.text = myProfile.name
+                myPageFragmentTvUserphone.text = myProfile.phoneNumber
+                myPageFragmentTvUseremail.text = myProfile.email
+                myPageFragmentTvUserevent.text = myProfile.event
             }
         }
 
         myPageFragmentBtnContactlist.setOnClickListener {
-
+            val mainActivity = activity as MainActivity
+            mainActivity.binding.tabLayout.getTabAt(0)?.select()
         }
     }
 

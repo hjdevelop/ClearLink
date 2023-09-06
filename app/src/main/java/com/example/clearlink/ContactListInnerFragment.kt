@@ -51,7 +51,8 @@ class ContactListInnerFragment : Fragment() {
                     "01012341234",
                     "email@gmail.com",
                     R.drawable.ic_star,
-                    false
+                    false,
+                    "event text"
                 )
             )
         }

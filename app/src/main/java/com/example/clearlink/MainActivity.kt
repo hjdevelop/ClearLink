@@ -8,7 +8,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    lateinit var binding: ActivityMainBinding
 
     private val viewPagerAdapter by lazy {
         ViewPagerAdapter(this)
@@ -34,4 +34,5 @@ class MainActivity : AppCompatActivity() {
         }.attach()
 
     }
+
 }

@@ -15,7 +15,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 class ContactListFragment : Fragment() {
 
-    val MyProfile = UserModel(R.drawable.sample_0, "이호식", "010-1234-1234", "team15@gmail.com", R.drawable.ic_star, false)
+    val MyProfile = UserModel(R.drawable.sample_0, "이호식", "010-1234-1234", "team15@gmail.com", R.drawable.ic_star, false, "EVENT TEXT")
 
     companion object {
         fun newInstance() = ContactListFragment()
@@ -39,8 +39,8 @@ class ContactListFragment : Fragment() {
 
         initView()
 
-        val bundle = bundleOf("senderKey" to MyProfile.name)
-        setFragmentResult("request", bundle)
+        val bundle = bundleOf("senderMyProfile" to MyProfile)
+        setFragmentResult("mypage", bundle)
     }
 
     private fun initView() = with(binding) {
@@ -53,6 +53,7 @@ class ContactListFragment : Fragment() {
             tab.text = adapter.getTitle(position)
         }.attach()
 
+        contactListFragmentProfileIcon.setImageResource(MyProfile.profileImg)
         contactListFragmentProfileName.text = MyProfile.name
     }
 

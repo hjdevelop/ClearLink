@@ -1,6 +1,10 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+
+    //추가
+    id 'kotlin-parcelize'
+    id 'kotlin-android'
 }
 
 android {
