@@ -45,6 +45,17 @@ class AddContactDialog : DialogFragment() {
 
     val emailValidation = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
 
+    private val activityResult: ActivityResultLauncher<Intent> = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        if(it.resultCode == RESULT_OK && it.data != null) {
+            val uri = it.data!!.data
+
+            Glide.with(this)
+                .load(uri)
+                .into(binding.addContactDialogProfileCircleImageView)
+            imageUri = uri
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -70,9 +81,15 @@ class AddContactDialog : DialogFragment() {
             val phonenumber = binding.addContactDialogTelEditText.text.toString()
             val email = binding.addContactDialogEmailEditText.text.toString()
             val event = binding.addContactDialogEventEditText.text.toString()
-            val UserProfile = UserModel(Uri.parse("android.resource://" + context?.packageName + "/" + R.drawable.sample_0), name, phonenumber, email, R.drawable.ic_star, false, event)
 
-            DialogResult?.finish(UserProfile)
+            if(imageUri == null){
+                val UserProfile = UserModel(Uri.parse("android.resource://" + context?.packageName + "/" + R.drawable.ic_mypage), name, phonenumber, email, R.drawable.ic_star, false, event)
+                DialogResult?.finish(UserProfile)
+            }else{
+                val UserProfile = UserModel(imageUri, name, phonenumber, email, R.drawable.ic_star, false, event)
+                DialogResult?.finish(UserProfile)
+            }
+
             dismiss()
         }
 
@@ -179,14 +196,4 @@ class AddContactDialog : DialogFragment() {
         _binding = null
     }
 
-    private val activityResult: ActivityResultLauncher<Intent> = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-        if(it.resultCode == RESULT_OK && it.data != null) {
-            val uri = it.data!!.data
-
-            Glide.with(this)
-                .load(uri)
-                .into(binding.addContactDialogProfileCircleImageView)
-            imageUri = uri
-        }
-    }
 }

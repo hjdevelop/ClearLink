@@ -9,7 +9,7 @@ import java.net.URL
 
 @Parcelize
 data class UserModel(
-    val profileImg: Uri,
+    val profileImg: Uri?,
     val name: String,
     val phoneNumber: String,
     val email : String,

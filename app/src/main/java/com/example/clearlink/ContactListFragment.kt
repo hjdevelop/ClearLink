@@ -58,8 +58,9 @@ class ContactListFragment : Fragment() {
 
 
         val uri = Uri.parse("android.resource://" + context?.packageName + "/" + R.drawable.sample_2)
+        val uri2 = MyProfile.profileImg
 
-        contactListFragmentProfileIcon.setImageURI(uri)
+        contactListFragmentProfileIcon.setImageURI(uri2)
         contactListFragmentProfileName.text = MyProfile.name
     }
 
