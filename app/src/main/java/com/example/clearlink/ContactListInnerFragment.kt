@@ -56,14 +56,15 @@ class ContactListInnerFragment : Fragment() {
 
         listAdapter.itemClick = object : ContactListAdapter.ItemClick {
             override fun onClick(view: View, position: Int) {
-                //데이터를 번들에 담기
-                val bundle = Bundle()
-                bundle.putInt("ITEM_INDEX", position)
-                bundle.putParcelable("ITEM_OBJECT", datalist[position])
+//                //데이터를 번들에 담기
+//                val bundle = Bundle()
+//                bundle.putInt("ITEM_INDEX", position)
+//                bundle.putParcelable("ITEM_OBJECT", datalist[position])
 
                 // Intent를 사용하여 ContactDetailFragment를 시작하고 데이터를 전달
                 val intent = Intent(view.context, ContactDetailFragment::class.java)
-                intent.putExtras(bundle) // 데이터를 Intent에 추가
+//                intent.putExtras(bundle) // 데이터를 Intent에 추가
+                intent.putExtra("item", datalist[position])
 
                 view.context.startActivity(intent) // 액티비티 시작
 
