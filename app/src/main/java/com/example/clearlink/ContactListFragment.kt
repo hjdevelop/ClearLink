@@ -18,7 +18,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 class ContactListFragment : Fragment() {
 
-    val MyProfile = UserModel(Uri.parse("android.resource://" + context?.packageName + "/" + R.drawable.sample_2), "이호식", "010-1234-1234", "team15@gmail.com", R.drawable.ic_star, false, "EVENT TEXT")
+    val MyProfile = UserModel(Uri.parse("android.resource://" + "com.example.clearlink" + "/" + R.drawable.sample_2), "이호식", "010-1234-1234", "team15@gmail.com", R.drawable.ic_star, false, "EVENT TEXT")
 
     companion object {
         fun newInstance() = ContactListFragment()
@@ -57,10 +57,9 @@ class ContactListFragment : Fragment() {
         }.attach()
 
 
-        val uri = Uri.parse("android.resource://" + context?.packageName + "/" + R.drawable.sample_2)
-        val uri2 = MyProfile.profileImg
+        val uri = MyProfile.profileImg
 
-        contactListFragmentProfileIcon.setImageURI(uri2)
+        contactListFragmentProfileIcon.setImageURI(uri)
         contactListFragmentProfileName.text = MyProfile.name
     }
 
