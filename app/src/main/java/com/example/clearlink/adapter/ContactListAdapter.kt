@@ -15,12 +15,17 @@ class ContactListAdapter : RecyclerView.Adapter<ContactListAdapter.ViewHolder>()
         notifyDataSetChanged()
     }
 
+    fun addItem(items: UserModel) {
+        list.add(items)
+        notifyDataSetChanged()
+    }
+
     class ViewHolder(
         private val binding: RvItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: UserModel) = with(binding) {
-            contactListRecyclerviewProfileIcon.setImageResource(item.profileImg)
+            contactListRecyclerviewProfileIcon.setImageURI(item.profileImg)
             contactListRecyclerviewProfileName.text = item.name
             contactListRecyclerviewFavorites.setImageResource(item.favoritesImg)
         }

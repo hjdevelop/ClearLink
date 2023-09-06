@@ -48,7 +48,7 @@ class ContactListInnerFavoritesFragment : Fragment() {
         for (i in 0 until 3) {
             testList.add(
                 UserModel(
-                    Uri.parse("android.resource://com.example.clearlink/${R.drawable.sample_0}"),
+                    Uri.parse("android.resource://" + context?.packageName + "/" + R.drawable.sample_0),
                     "즐겨찾기",
                     "010-1234-1234",
                     "team15@gmail.com",

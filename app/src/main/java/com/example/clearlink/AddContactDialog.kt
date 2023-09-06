@@ -12,15 +12,20 @@ import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.setFragmentResult
 import com.bumptech.glide.Glide
+import com.example.clearlink.adapter.ContactListAdapter
 import com.example.clearlink.databinding.DialogAddContactBinding
+import com.example.clearlink.model.UserModel
 import java.util.regex.Pattern
 
 class AddContactDialog : DialogFragment() {
@@ -28,7 +33,28 @@ class AddContactDialog : DialogFragment() {
     private val binding get() = _binding!!
     private var imageUri: Uri? = null
 
+    interface DailogResult{
+        fun finish(result: UserModel)
+    }
+
+    fun setDialogResult(dialogResult: DailogResult) {
+        DialogResult = dialogResult
+    }
+
+    private var DialogResult : DailogResult? = null
+
     val emailValidation = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
+
+    private val activityResult: ActivityResultLauncher<Intent> = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        if(it.resultCode == RESULT_OK && it.data != null) {
+            val uri = it.data!!.data
+
+            Glide.with(this)
+                .load(uri)
+                .into(binding.addContactDialogProfileCircleImageView)
+            imageUri = uri
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,7 +77,20 @@ class AddContactDialog : DialogFragment() {
         }
 
         binding.addContactDialogSaveButton.setOnClickListener {
-            dataList.add()
+            val name = binding.addContactDialogNameEditText.text.toString()
+            val phonenumber = binding.addContactDialogTelEditText.text.toString()
+            val email = binding.addContactDialogEmailEditText.text.toString()
+            val event = binding.addContactDialogEventEditText.text.toString()
+
+            if(imageUri == null){
+                val UserProfile = UserModel(Uri.parse("android.resource://" + context?.packageName + "/" + R.drawable.ic_mypage), name, phonenumber, email, R.drawable.ic_star, false, event)
+                DialogResult?.finish(UserProfile)
+            }else{
+                val UserProfile = UserModel(imageUri, name, phonenumber, email, R.drawable.ic_star, false, event)
+                DialogResult?.finish(UserProfile)
+            }
+
+            dismiss()
         }
 
         binding.addContactDialogNameEditText.addTextChangedListener(object : TextWatcher {
@@ -157,14 +196,4 @@ class AddContactDialog : DialogFragment() {
         _binding = null
     }
 
-    private val activityResult: ActivityResultLauncher<Intent> = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-        if(it.resultCode == RESULT_OK && it.data != null) {
-            val uri = it.data!!.data
-
-            Glide.with(this)
-                .load(uri)
-                .into(binding.addContactDialogProfileCircleImageView)
-            imageUri = uri
-        }
-    }
 }
