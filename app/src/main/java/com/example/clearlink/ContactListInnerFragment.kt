@@ -1,18 +1,18 @@
 package com.example.clearlink
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.setFragmentResultListener
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.clearlink.adapter.ContactListAdapter
-import com.example.clearlink.adapter.ContactListViewPagerAdapter
-import com.example.clearlink.databinding.FragmentContactListBinding
 import com.example.clearlink.databinding.FragmentContactListInnerBinding
 import com.example.clearlink.model.UserModel
-import com.google.android.material.tabs.TabLayoutMediator
 
 class ContactListInnerFragment : Fragment() {
 
@@ -40,12 +40,6 @@ class ContactListInnerFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initView()
-
-        // for testww
-        val testList = arrayListOf<UserModel>()
-
-
-        listAdapter.addItems(testList)
     }
 
     private fun initView() = with(binding) {
@@ -60,7 +54,14 @@ class ContactListInnerFragment : Fragment() {
         )
 
         contactListInnerFragmentFab.setOnClickListener {
-
+            val dialog = AddContactDialog()
+            dialog.show(requireActivity().supportFragmentManager, "AddContactDialog")
+            dialog.setDialogResult(object : AddContactDialog.DailogResult {
+                override fun finish(result: UserModel) {
+                    Log.d("UserModel", result.toString())
+                    listAdapter.addItem(result)
+                }
+            })
         }
 
     }

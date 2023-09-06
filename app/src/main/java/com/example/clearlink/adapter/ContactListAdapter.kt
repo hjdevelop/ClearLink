@@ -15,6 +15,11 @@ class ContactListAdapter : RecyclerView.Adapter<ContactListAdapter.ViewHolder>()
         notifyDataSetChanged()
     }
 
+    fun addItem(items: UserModel) {
+        list.add(items)
+        notifyDataSetChanged()
+    }
+
     class ViewHolder(
         private val binding: RvItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
