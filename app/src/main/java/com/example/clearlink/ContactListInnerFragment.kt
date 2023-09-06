@@ -58,7 +58,6 @@ class ContactListInnerFragment : Fragment() {
             dialog.show(requireActivity().supportFragmentManager, "AddContactDialog")
             dialog.setDialogResult(object : AddContactDialog.DailogResult {
                 override fun finish(result: UserModel) {
-                    Log.d("UserModel", result.toString())
                     listAdapter.addItem(result)
                 }
             })
