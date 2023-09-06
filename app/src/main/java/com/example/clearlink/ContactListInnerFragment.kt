@@ -58,7 +58,10 @@ class ContactListInnerFragment : Fragment() {
                 LinearLayoutManager.VERTICAL
             )
         )
-
+        contactListInnerFragmentFab.setOnClickListener {
+            val dialog = AddContactDialog()
+            dialog.show(requireActivity().supportFragmentManager, "AddContactDialog")
+        }
     }
 
     override fun onDestroyView() {
