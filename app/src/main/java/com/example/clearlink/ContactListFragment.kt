@@ -1,6 +1,8 @@
 package com.example.clearlink
 
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,9 +15,10 @@ import com.example.clearlink.databinding.FragmentContactListBinding
 import com.example.clearlink.model.UserModel
 import com.google.android.material.tabs.TabLayoutMediator
 
+
 class ContactListFragment : Fragment() {
 
-    val MyProfile = UserModel(R.drawable.sample_0, "이호식", "010-1234-1234", "team15@gmail.com", R.drawable.ic_star, false, "EVENT TEXT")
+    val MyProfile = UserModel(Uri.parse("android.resource://" + context?.packageName + "/" + R.drawable.sample_2), "이호식", "010-1234-1234", "team15@gmail.com", R.drawable.ic_star, false, "EVENT TEXT")
 
     companion object {
         fun newInstance() = ContactListFragment()
@@ -53,7 +56,10 @@ class ContactListFragment : Fragment() {
             tab.text = adapter.getTitle(position)
         }.attach()
 
-        contactListFragmentProfileIcon.setImageResource(MyProfile.profileImg)
+
+        val uri = Uri.parse("android.resource://" + context?.packageName + "/" + R.drawable.sample_2)
+
+        contactListFragmentProfileIcon.setImageURI(uri)
         contactListFragmentProfileName.text = MyProfile.name
     }
 

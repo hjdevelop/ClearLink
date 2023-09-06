@@ -20,7 +20,7 @@ class ContactListAdapter : RecyclerView.Adapter<ContactListAdapter.ViewHolder>()
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: UserModel) = with(binding) {
-            contactListRecyclerviewProfileIcon.setImageResource(item.profileImg)
+            contactListRecyclerviewProfileIcon.setImageURI(item.profileImg)
             contactListRecyclerviewProfileName.text = item.name
             contactListRecyclerviewFavorites.setImageResource(item.favoritesImg)
         }

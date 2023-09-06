@@ -59,6 +59,10 @@ class ContactListInnerFragment : Fragment() {
             )
         )
 
+        contactListInnerFragmentFab.setOnClickListener {
+
+        }
+
     }
 
     override fun onDestroyView() {

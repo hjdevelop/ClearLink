@@ -51,7 +51,7 @@ class AddContactDialog : DialogFragment() {
         }
 
         binding.addContactDialogSaveButton.setOnClickListener {
-            dataList.add()
+//            dataList.add()
         }
 
         binding.addContactDialogNameEditText.addTextChangedListener(object : TextWatcher {

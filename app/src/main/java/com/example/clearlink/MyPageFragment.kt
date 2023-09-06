@@ -42,7 +42,7 @@ class MyPageFragment : Fragment() {
 
         setFragmentResultListener("mypage") { key, bundle ->
             bundle.getParcelable<UserModel>("senderMyProfile")?.let { myProfile ->
-                myPageFragmentProfileIcon.setImageResource(myProfile.profileImg)
+                myPageFragmentProfileIcon.setImageURI(myProfile.profileImg)
                 myPageFragmentName.text = myProfile.name
                 myPageFragmentTvUserphone.text = myProfile.phoneNumber
                 myPageFragmentTvUseremail.text = myProfile.email
