@@ -14,6 +14,6 @@ data class UserModel(
     val phoneNumber: String,
     val email : String,
     val favoritesImg: Int,
-    val favorites: Boolean,
+    var favorites: Boolean,
     val event: String
 ) : Parcelable
