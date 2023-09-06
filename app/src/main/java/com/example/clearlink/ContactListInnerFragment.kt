@@ -1,6 +1,7 @@
 package com.example.clearlink
 
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.clearlink.adapter.ContactListAdapter
 import com.example.clearlink.databinding.FragmentContactListInnerBinding
 import com.example.clearlink.model.UserModel
+
 
 class ContactListInnerFragment : Fragment() {
 
@@ -54,18 +56,18 @@ class ContactListInnerFragment : Fragment() {
 
         listAdapter.itemClick = object : ContactListAdapter.ItemClick {
             override fun onClick(view: View, position: Int) {
-                val args = Bundle()
-                args.putInt("ITEM_INDEX", position)
-                args.putParcelable("ITEM_OBJECT", datalist[position])
+                //데이터를 번들에 담기
+                val bundle = Bundle()
+                bundle.putInt("ITEM_INDEX", position)
+                bundle.putParcelable("ITEM_OBJECT", datalist[position])
 
-                val contactDetailFragment = ContactDetailFragment()
-                ContactDetailFragment().arguments = args
+                // Intent를 사용하여 ContactDetailFragment를 시작하고 데이터를 전달
+                val intent = Intent(view.context, ContactDetailFragment::class.java)
+                intent.putExtras(bundle) // 데이터를 Intent에 추가
 
-                // Fragment를 교체
-                val transaction = fragmentManager?.beginTransaction()
-                transaction?.replace(R.id.viewPager2, contactDetailFragment)
-                transaction?.addToBackStack(null)
-                transaction?.commit()
+                view.context.startActivity(intent) // 액티비티 시작
+
+
             }
         }
     }

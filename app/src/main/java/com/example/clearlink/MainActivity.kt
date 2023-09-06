@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
 
     private val tabIcon = arrayListOf(
         R.drawable.ic_contact_list,
-        R.drawable.ic_mypage
+        R.drawable.ic_mypage,
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,7 +32,6 @@ class MainActivity : AppCompatActivity() {
             tab.setText(viewPagerAdapter.getTitle(position))
             tab.setIcon(tabIcon[position])
         }.attach()
-
 
     }
 }
