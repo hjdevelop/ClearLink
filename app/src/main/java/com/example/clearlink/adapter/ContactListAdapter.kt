@@ -16,8 +16,10 @@ class ContactListAdapter : RecyclerView.Adapter<ContactListAdapter.ViewHolder>()
         fun onClick(view: View, position: Int)
     }
 
+    //좋아요 클릭
     var itemClick: ItemClick? = null
-
+    //페이지 이동 클릭
+    var itemClick2: ItemClick? = null
     fun addItems(items: List<UserModel>) {
         list.addAll(items)
         notifyDataSetChanged()
@@ -61,12 +63,6 @@ class ContactListAdapter : RecyclerView.Adapter<ContactListAdapter.ViewHolder>()
         }
     }
 
-    interface ItemClick {
-        fun onClick(view: View, position: Int)
-    }
-
-    var itemClick: ItemClick? = null
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             RvItemBinding.inflate(LayoutInflater.from(parent.context))
@@ -77,7 +73,7 @@ class ContactListAdapter : RecyclerView.Adapter<ContactListAdapter.ViewHolder>()
 
         //클릭 이벤트 추가
         holder.itemView.setOnClickListener {
-            itemClick?.onClick(it, position)
+            itemClick2?.onClick(it, position)
         }
 
         val item = list[position]

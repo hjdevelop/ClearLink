@@ -21,7 +21,8 @@ class ContactDetailFragment : AppCompatActivity() {
 
         val item = intent.getParcelableExtra<UserModel>("item") as UserModel
 
-        binding.contactDetailFragmentProfileIcon.setImageResource(item.profileImg)
+        binding.contactDetailFragmentProfileIcon.setImageURI(
+            item.profileImg)
         binding.contactDetailFragmentName.text = item.name
         binding.contactDetailFragmentTvUserphone.text=item.phoneNumber
         binding.contactDetailFragmentTvUseremail.text=item.email

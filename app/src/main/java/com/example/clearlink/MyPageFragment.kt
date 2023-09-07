@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.setFragmentResultListener
 import com.example.clearlink.databinding.FragmentMyPageBinding
+import com.example.clearlink.model.UserModel
 
 
 class MyPageFragment : Fragment() {
