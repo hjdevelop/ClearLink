@@ -2,14 +2,12 @@ package com.example.clearlink
 
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
-import com.example.clearlink.adapter.ContactListAdapter
 import com.example.clearlink.adapter.ContactListViewPagerAdapter
 import com.example.clearlink.databinding.FragmentContactListBinding
 import com.example.clearlink.model.UserModel
