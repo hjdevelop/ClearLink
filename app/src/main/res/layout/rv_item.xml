@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout"
+        android:id="@+id/contact_list_recyclerview_layout"
         android:layout_width="match_parent"
         android:layout_height="90dp"
         app:layout_constraintEnd_toEndOf="parent"

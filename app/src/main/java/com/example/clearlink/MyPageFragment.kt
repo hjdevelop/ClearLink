@@ -6,12 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.setFragmentResultListener
-import com.example.clearlink.adapter.ContactListViewPagerAdapter
-import com.example.clearlink.databinding.FragmentContactListBinding
 import com.example.clearlink.databinding.FragmentMyPageBinding
 import com.example.clearlink.model.UserModel
-import com.google.android.material.tabs.TabLayoutMediator
-import java.text.DecimalFormat
+
 
 class MyPageFragment : Fragment() {
 

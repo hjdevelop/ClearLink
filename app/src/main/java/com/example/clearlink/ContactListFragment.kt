@@ -13,14 +13,10 @@ import com.example.clearlink.databinding.FragmentContactListBinding
 import com.example.clearlink.model.UserModel
 import com.google.android.material.tabs.TabLayoutMediator
 
-
 class ContactListFragment : Fragment() {
 
     val MyProfile = UserModel(Uri.parse("android.resource://" + "com.example.clearlink" + "/" + R.drawable.sample_0), "이호식", "010-1234-1234", "team15@gmail.com", R.drawable.ic_star, false, "EVENT TEXT")
 
-    companion object {
-        fun newInstance() = ContactListFragment()
-    }
 
     private var _binding: FragmentContactListBinding? = null
     private val binding get() = _binding!!

@@ -33,8 +33,3 @@
     </com.google.android.material.tabs.TabLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-<!--
-        app:tabRippleColor="@android:color/transparent"
-        app:tabIndicatorColor="@android:color/transparent"
--->
