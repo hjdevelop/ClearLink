@@ -59,8 +59,8 @@ class ContactListInnerFavoritesFragment : Fragment() {
                 }
             }
 
-            Log.d("item", "${item}")
-            Log.d("position", "${position}")
+            Log.d("item", "$item")
+            Log.d("position", "$position")
         }
 
 

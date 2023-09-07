@@ -47,7 +47,7 @@ class ContactListInnerFragment : Fragment() {
         initView()
 
         // for test
-        for (i in 0 until 3) {
+        for (i in 0 until 2) {
             testList.add(
                 UserModel(
                     Uri.parse("android.resource://" + context?.packageName + "/" + R.drawable.sample_0),
@@ -106,6 +106,7 @@ class ContactListInnerFragment : Fragment() {
             dialog.setDialogResult(object : AddContactDialog.DailogResult {
                 override fun finish(result: UserModel) {
                     listAdapter.addItem(result)
+                    testList.add(result)
                 }
             })
         }
