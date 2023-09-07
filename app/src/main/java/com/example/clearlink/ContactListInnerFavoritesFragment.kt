@@ -1,5 +1,6 @@
 package com.example.clearlink
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -48,7 +49,7 @@ class ContactListInnerFavoritesFragment : Fragment() {
             testList.add(
                 UserModel(
                     R.drawable.sample_2,
-                    "즐겨찾기",
+                    "즐겨찾기"+i,
                     "010-1234-1234",
                     "team15@gmail.com",
                     "event",
@@ -59,6 +60,21 @@ class ContactListInnerFavoritesFragment : Fragment() {
         }
 
         listAdapter.addItems(testList)
+
+        listAdapter.addItems(testList)
+
+        listAdapter.itemClick = object : ContactListAdapter.ItemClick {
+            override fun onClick(view: View, position: Int) {
+
+                val intent = Intent(view.context, ContactDetailFragment::class.java)
+                intent.putExtra("item", testList[position])
+
+
+                view.context.startActivity(intent) // 액티비티 시작
+
+
+            }
+        }
     }
 
     private fun initView() = with(binding) {
