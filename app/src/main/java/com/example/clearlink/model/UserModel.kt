@@ -2,10 +2,7 @@ package com.example.clearlink.model
 
 import android.net.Uri
 import android.os.Parcelable
-import androidx.fragment.app.Fragment
 import kotlinx.parcelize.Parcelize
-import java.net.URI
-import java.net.URL
 
 @Parcelize
 data class UserModel(

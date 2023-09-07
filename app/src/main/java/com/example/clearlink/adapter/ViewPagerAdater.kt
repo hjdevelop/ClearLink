@@ -31,4 +31,9 @@ class ViewPagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapte
     fun getTitle(position: Int): String {
         return fragments[position].title
     }
+
+    fun getFrag(position:Int):Fragment{
+        return fragments[position].fragment
+    }
+
 }

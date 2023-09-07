@@ -1,6 +1,6 @@
 package com.example.clearlink
 
-import android.net.Uri
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,12 +11,8 @@ import androidx.fragment.app.setFragmentResultListener
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.clearlink.adapter.ContactListAdapter
-import com.example.clearlink.adapter.ContactListViewPagerAdapter
-import com.example.clearlink.databinding.FragmentContactListBinding
-import com.example.clearlink.databinding.FragmentContactListInnerBinding
 import com.example.clearlink.databinding.FragmentContactListInnerFavoritesBinding
 import com.example.clearlink.model.UserModel
-import com.google.android.material.tabs.TabLayoutMediator
 
 class ContactListInnerFavoritesFragment : Fragment() {
 
@@ -63,6 +59,20 @@ class ContactListInnerFavoritesFragment : Fragment() {
             Log.d("position", "$position")
         }
 
+                listAdapter.addItems(testList)
+
+        listAdapter.itemClick2 = object : ContactListAdapter.ItemClick {
+            override fun onClick(view: View, position: Int) {
+
+                val intent = Intent(view.context, ContactDetailFragment::class.java)
+                intent.putExtra("item", testList[position])
+
+
+                view.context.startActivity(intent) // 액티비티 시작
+
+
+            }
+        }
 
     }
 
