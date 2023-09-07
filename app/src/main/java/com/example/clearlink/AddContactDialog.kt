@@ -131,7 +131,7 @@ class AddContactDialog : DialogFragment() {
 
     override fun onResume() {
         super.onResume()
-        context?.dialogFragmentResize(this@AddContactDialog, 0.9f, 0.9f)
+        context?.dialogFragmentResize(this@AddContactDialog, 0.9f, 0.7f)
     }
 
     private fun Context.dialogFragmentResize(dialogFragment: DialogFragment, width: Float, height: Float) {

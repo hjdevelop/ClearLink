@@ -2,13 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@drawable/ic_rounded_corner_dialog"
     android:orientation="vertical">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="640dp">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -165,15 +165,13 @@
                     android:ems="10"
                     android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
-    </ScrollView>
 
-    <LinearLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:layout_marginBottom="20dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="20dp">
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/addContactDialog_cancel_button"
@@ -199,4 +197,8 @@
 
             </LinearLayout>
 
+
+
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
