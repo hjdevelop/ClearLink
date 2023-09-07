@@ -68,7 +68,7 @@
         tools:ignore="SpeakableTextPresentCheck"/>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/my_page_fragment_btn_phonecall"
+        android:id="@+id/contact_detail_fragment_btn_phonecall"
         android:layout_width="110dp"
         android:layout_height="75dp"
         android:layout_marginTop="38dp"
