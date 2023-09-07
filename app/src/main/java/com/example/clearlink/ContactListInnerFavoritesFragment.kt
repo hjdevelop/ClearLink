@@ -1,11 +1,14 @@
 package com.example.clearlink
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.setFragmentResultListener
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.clearlink.adapter.ContactListAdapter
@@ -20,6 +23,7 @@ class ContactListInnerFavoritesFragment : Fragment() {
 
     companion object {
         fun newInstance() = ContactListInnerFavoritesFragment()
+        val testList = arrayListOf<UserModel>()
     }
 
     private var _binding: FragmentContactListInnerFavoritesBinding? = null
@@ -43,25 +47,24 @@ class ContactListInnerFavoritesFragment : Fragment() {
 
         initView()
 
-        // for testww
-        val testList = arrayListOf<UserModel>()
-        for (i in 0 until 3) {
-            testList.add(
-                UserModel(
-                    R.drawable.sample_2,
-                    "즐겨찾기"+i,
-                    "010-1234-1234",
-                    "team15@gmail.com",
-                    "event",
-                    R.drawable.ic_full_start,
-                    true
-                )
-            )
+        setFragmentResultListener("requestKey") { requestKey, bundle ->
+            val item = bundle.getParcelable<UserModel>("item")
+            val position = bundle.getInt("position", 0)
+
+//            listAdapter.addItemNS(item)
+
+            item?.let {
+                if (it !in testList) {
+                    testList.add(it)
+                    listAdapter.addItemNS(it)
+                }
+            }
+
+            Log.d("item", "$item")
+            Log.d("position", "$position")
         }
 
-        listAdapter.addItems(testList)
-
-        listAdapter.addItems(testList)
+                listAdapter.addItems(testList)
 
         listAdapter.itemClick = object : ContactListAdapter.ItemClick {
             override fun onClick(view: View, position: Int) {
@@ -75,6 +78,17 @@ class ContactListInnerFavoritesFragment : Fragment() {
 
             }
         }
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("test3 : resume","")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d("test4 : Pause","")
     }
 
     private fun initView() = with(binding) {

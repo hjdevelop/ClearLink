@@ -5,7 +5,6 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.clearlink.ContactListFragment
 import com.example.clearlink.ContactListInnerFavoritesFragment
 import com.example.clearlink.ContactListInnerFragment
-import com.example.clearlink.MyPageFragment
 import com.example.clearlink.model.Tabs
 class ContactListViewPagerAdapter(fragmentActivity: ContactListFragment) : FragmentStateAdapter(fragmentActivity) {
 

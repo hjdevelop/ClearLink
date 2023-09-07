@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.clearlink.R
 import com.example.clearlink.databinding.RvItemBinding
 import com.example.clearlink.model.UserModel
 
@@ -11,19 +12,52 @@ class ContactListAdapter : RecyclerView.Adapter<ContactListAdapter.ViewHolder>()
 
     private val list = ArrayList<UserModel>()
 
+    interface ItemClick {
+        fun onClick(view: View, position: Int)
+    }
+
+    var itemClick: ItemClick? = null
+
     fun addItems(items: List<UserModel>) {
         list.addAll(items)
         notifyDataSetChanged()
     }
 
-    class ViewHolder(
+    fun addItem(items: UserModel) {
+        list.add(items)
+        notifyDataSetChanged()
+    }
+
+    fun addItemNS(userModel: UserModel?) {
+        if (userModel == null) {
+            return
+        }
+        list.add(userModel)
+        notifyDataSetChanged()
+    }
+
+    inner class ViewHolder(
         private val binding: RvItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
+        init {
+            binding.contactListRecyclerviewFavorites.setOnClickListener {
+                itemClick?.onClick(it, adapterPosition)
+                val isFavorite = list[adapterPosition].favorites
+                list[adapterPosition].favorites = !isFavorite
+                notifyDataSetChanged()
+            }
+        }
+
         fun bind(item: UserModel) = with(binding) {
-            contactListRecyclerviewProfileIcon.setImageResource(item.profileImg)
+            contactListRecyclerviewProfileIcon.setImageURI(item.profileImg)
             contactListRecyclerviewProfileName.text = item.name
-            contactListRecyclerviewFavorites.setImageResource(item.favoritesImg)
+            if(item.favorites) {
+                contactListRecyclerviewFavorites.setImageResource(R.drawable.ic_full_start)
+            } else {
+                contactListRecyclerviewFavorites.setImageResource(R.drawable.ic_star)
+            }
+
         }
     }
 

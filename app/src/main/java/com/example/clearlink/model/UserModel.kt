@@ -1,15 +1,16 @@
 package com.example.clearlink.model
 
+import android.net.Uri
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class UserModel(
-    val profileImg: Int,
+    val profileImg: Uri?,
     val name: String,
     val phoneNumber: String,
     val email : String,
-    val event :String,
     val favoritesImg: Int,
-    val favorites: Boolean
-):Parcelable
+    var favorites: Boolean,
+    val event: String
+) : Parcelable

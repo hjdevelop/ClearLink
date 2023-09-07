@@ -3,16 +3,21 @@ package com.example.clearlink
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.os.bundleOf
+import androidx.fragment.app.setFragmentResult
+import androidx.fragment.app.setFragmentResultListener
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.clearlink.adapter.ContactListAdapter
 import com.example.clearlink.databinding.FragmentContactListInnerBinding
 import com.example.clearlink.model.UserModel
-
+import com.google.android.material.tabs.TabLayoutMediator
 
 class ContactListInnerFragment : Fragment() {
 
@@ -22,6 +27,8 @@ class ContactListInnerFragment : Fragment() {
     private val listAdapter by lazy {
         ContactListAdapter()
     }
+
+    private val testList = arrayListOf<UserModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -64,9 +71,33 @@ class ContactListInnerFragment : Fragment() {
                 view.context.startActivity(intent) // 액티비티 시작
 
 
+        listAdapter.addItems(testList)
+
+//         별 클릭시 즐겨찾기에 연락처 추가 로직
+        listAdapter.itemClick = object : ContactListAdapter.ItemClick {
+            override fun onClick(view: View, position: Int) {
+                val item = testList[position]
+                val position = position
+                if(!item.favorites) {
+                    setFragmentResult("requestKey", bundleOf("item" to item, "position" to position))
+                }
             }
         }
     }
+
+//    override fun onResume() {
+//        super.onResume()
+//        // 별 클릭시 즐겨찾기에 연락처 추가 로직
+//        listAdapter.itemClick = object : ContactListAdapter.ItemClick {
+//            override fun onClick(view: View, position: Int) {
+//                val item = testList[position]
+//                val position = position
+//                if(!item.favorites) {
+//                    setFragmentResult("requestKey", bundleOf("item" to item, "position" to position))
+//                }
+//            }
+//        }
+//    }
 
     private fun initView() = with(binding) {
 
@@ -80,7 +111,18 @@ class ContactListInnerFragment : Fragment() {
         )
     }
 
+        contactListInnerFragmentFab.setOnClickListener {
+            val dialog = AddContactDialog()
+            dialog.show(requireActivity().supportFragmentManager, "AddContactDialog")
+            dialog.setDialogResult(object : AddContactDialog.DailogResult {
+                override fun finish(result: UserModel) {
+                    listAdapter.addItem(result)
+                    testList.add(result)
+                }
+            })
+        }
 
+    }
 
     override fun onDestroyView() {
         _binding = null

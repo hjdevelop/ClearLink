@@ -1,6 +1,9 @@
 package com.example.clearlink
 
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,20 +16,10 @@ import com.example.clearlink.databinding.FragmentContactListBinding
 import com.example.clearlink.model.UserModel
 import com.google.android.material.tabs.TabLayoutMediator
 
-interface ViewPagerProvider {
-    fun getViewPager(): ViewPager2
-}
+class ContactListFragment : Fragment() {
 
-class ContactListFragment : Fragment(), ViewPagerProvider {
-    private lateinit var viewPager: ViewPager2
+    val MyProfile = UserModel(Uri.parse("android.resource://" + "com.example.clearlink" + "/" + R.drawable.sample_2), "이호식", "010-1234-1234", "team15@gmail.com", R.drawable.ic_star, false, "EVENT TEXT")
 
-    // ViewPager2를 반환하는 getViewPager() 메서드 구현
-    override fun getViewPager(): ViewPager2 {
-        return viewPager
-    }
-
-
-    val MyProfile = UserModel(R.drawable.sample_0, "이호식", "010-1234-1234", "team15@gmail.com","이벤트", R.drawable.ic_star, false)
 
     private var _binding: FragmentContactListBinding? = null
     private val binding get() = _binding!!
@@ -46,8 +39,8 @@ class ContactListFragment : Fragment(), ViewPagerProvider {
 
         initView()
 
-        val bundle = bundleOf("senderKey" to MyProfile.name)
-        setFragmentResult("request", bundle)
+        val bundle = bundleOf("senderMyProfile" to MyProfile)
+        setFragmentResult("mypage", bundle)
     }
 
     private fun initView() = with(binding) {
@@ -60,6 +53,10 @@ class ContactListFragment : Fragment(), ViewPagerProvider {
             tab.text = adapter.getTitle(position)
         }.attach()
 
+
+        val uri = MyProfile.profileImg
+
+        contactListFragmentProfileIcon.setImageURI(uri)
         contactListFragmentProfileName.text = MyProfile.name
     }
 
