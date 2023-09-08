@@ -1,6 +1,8 @@
 package com.example.clearlink
 
 
+import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -226,6 +228,7 @@ class ContactListInnerFragment : Fragment() {
                                 setFragmentResult("deleteKey", bundleOf("item" to item, "count" to count))
                                 listAdapter.deleteItem(position)
                                 datalist.removeAt(position)
+                                passData(datalist.size)
                             }
                             DialogInterface.BUTTON_NEGATIVE -> return
                         }
