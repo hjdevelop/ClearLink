@@ -44,7 +44,7 @@ class AlarmReceiver : BroadcastReceiver() {
             context,
             0,
             contentIntent,
-            PendingIntent.FLAG_UPDATE_CURRENT or FLAG_IMMUTABLE
+            PendingIntent.FLAG_MUTABLE
         )
 
         val builder = NotificationCompat.Builder(context, "channel_event")
