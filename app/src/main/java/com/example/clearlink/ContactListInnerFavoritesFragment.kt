@@ -46,27 +46,32 @@ class ContactListInnerFavoritesFragment : Fragment() {
 
         initView()
 
+        setFragmentResultListener("deleteKey") { deleteKey, bundle ->
+                val item = bundle.getParcelable<UserModel>("item")
+                if (item != null) {
+                    val position = testList.indexOf(item)
+                    listAdapter.deleteItem(position)
+                }
+            }
+
+
         setFragmentResultListener("requestKey") { requestKey, bundle ->
             val itemList = bundle.getParcelableArrayList<UserModel>("item")!!
-
             Log.d("FitemList", itemList.toString())
-
             sendList.clear()
 
             if (itemList != null) {
-                for(item in itemList){
-                    if(item.favorites == true && item !in testList){
+                for (item in itemList) {
+                    if (item.favorites == true && item !in testList) {
                         testList.add(item)
                         listAdapter.addFItem(item)
-                    }else if(item.favorites == false){
+                    } else if (item.favorites == false) {
                         testList.remove(item)
                         listAdapter.deleteFItem(item)
                     }
                 }
             }
-
             Log.d("testList", testList.toString())
-
         }
 
         listAdapter.addItems(testList)
@@ -92,16 +97,10 @@ class ContactListInnerFavoritesFragment : Fragment() {
                 intent.putExtra("item", testList[position])
 
                 view.context.startActivity(intent) // 액티비티 시작
-
             }
         }
-
     }
 
-    override fun onResume() {
-        super.onResume()
-        Log.d("test3 : resume","")
-    }
 
 //    override fun onPause() {
 //        super.onPause()

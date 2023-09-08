@@ -62,7 +62,6 @@ class MyItemTouchHelperCallback(private val adapter: ContactListAdapter) : ItemT
 
     // 아이템을 스와이프할 때 호출되는 메서드
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-        
         if(direction == ItemTouchHelper.RIGHT){
             val position = viewHolder.adapterPosition
             adapter.onItemSwipe(position, viewHolder.itemView.context)
