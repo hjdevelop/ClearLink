@@ -39,6 +39,7 @@ class ContactListAdapter : RecyclerView.Adapter<ContactListAdapter.ViewHolder>()
 
     fun addItems(items: List<UserModel>) {
         list.addAll(items)
+        Log.d("list", list.toString())
         notifyDataSetChanged()
     }
 
@@ -55,10 +56,34 @@ class ContactListAdapter : RecyclerView.Adapter<ContactListAdapter.ViewHolder>()
         notifyDataSetChanged()
     }
 
+    fun addFItem(item: UserModel){
+        if(item !in list && item.favorites == true){
+            list.add(item)
+        }else if(item.favorites != true){
+            list.remove(item)
+        }
+        notifyDataSetChanged()
+    }
+
+    fun deleteFItem(item: UserModel){
+        list.remove(item)
+        notifyDataSetChanged()
+    }
+
     fun deleteItem(position: Int?){
         if (position != null) {
             list.removeAt(position)
         }
+        notifyDataSetChanged()
+    }
+
+    fun getlist(): ArrayList<UserModel> {
+        return list
+    }
+
+    fun updateItem(position: Int){
+        list[position].favorites = false
+        Log.d("Alist", list[position].toString())
         notifyDataSetChanged()
     }
 
@@ -72,9 +97,7 @@ class ContactListAdapter : RecyclerView.Adapter<ContactListAdapter.ViewHolder>()
         init {
             binding.contactListRecyclerviewFavorites.setOnClickListener {
                 itemClick?.onClick(it, adapterPosition)
-                val isFavorite = list[adapterPosition].favorites
-                list[adapterPosition].favorites = !isFavorite
-                notifyDataSetChanged()
+                notifyItemChanged(adapterPosition)
             }
 
             swipeLayout = binding.contactListRecyclerviewLayout

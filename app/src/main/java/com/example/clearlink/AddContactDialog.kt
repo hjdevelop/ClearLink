@@ -96,7 +96,7 @@ class AddContactDialog : DialogFragment() {
             if(checkedEvent != 0) {
                 val alarmManager = requireContext().getSystemService(ALARM_SERVICE) as AlarmManager
 
-                val intent = Intent(requireContext(),AlarmReceiver::class.java)
+                val intent = Intent(requireContext(), AlarmReceiver::class.java)
                 val pendingIntent = PendingIntent.getBroadcast(
                     requireContext(), 0, intent,
                     PendingIntent.FLAG_UPDATE_CURRENT or FLAG_IMMUTABLE
@@ -204,7 +204,7 @@ class AddContactDialog : DialogFragment() {
 
     private fun checkData() {
         val name = binding.addContactDialogNameEditText.text.toString().trim()
-        val phoneNumber = binding.addContactDialogTelEditText.toString().trim()
+        val phoneNumber = binding.addContactDialogTelEditText.text.toString().trim()
         val email = binding.addContactDialogEmailEditText.text.toString().trim()
 
         binding.addContactDialogSaveButton.isEnabled = name.isNotEmpty() && phoneNumber.isNotEmpty() && email.isNotEmpty()

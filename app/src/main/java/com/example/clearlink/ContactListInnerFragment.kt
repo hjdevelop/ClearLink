@@ -14,6 +14,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
+import androidx.fragment.app.setFragmentResultListener
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -48,6 +49,7 @@ class ContactListInnerFragment : Fragment() {
     private val binding get() = _binding!!
 
     val datalist = arrayListOf<UserModel>()
+    val sendlist = arrayListOf<UserModel>()
 
     private val listAdapter by lazy {
         ContactListAdapter()
@@ -214,13 +216,18 @@ class ContactListInnerFragment : Fragment() {
         listAdapter.itemClick = object : ContactListAdapter.ItemClick {
             override fun onClick(view: View, position: Int) {
 
-                val item = datalist[position]
-                val position = position
-                if(!item.favorites) {
-                    count += 1
-                    setFragmentResult("requestKey", bundleOf("item" to item, "position" to position))
-                }
+                datalist[position].favorites = !datalist[position].favorites
+                setFragmentResult("requestKey", bundleOf("item" to datalist))
             }
+        }
+
+        setFragmentResultListener("favorite") { requestKey, bundle ->
+            val removedata = bundle.getParcelable<UserModel>("removedata")
+
+            val poisition = datalist.indexOf(removedata)
+            Log.d("Rpoistion", poisition.toString())
+            datalist[poisition].favorites = true
+            listAdapter.updateItem(poisition)
         }
 
         // 롱 클릭시 연락처 삭제 로직

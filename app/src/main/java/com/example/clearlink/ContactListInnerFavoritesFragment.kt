@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
@@ -44,21 +46,35 @@ class ContactListInnerFavoritesFragment : Fragment() {
         initView()
 
         setFragmentResultListener("requestKey") { requestKey, bundle ->
-            val item = bundle.getParcelable<UserModel>("item")
-            val position = bundle.getInt("position", 0)
+            val itemList = bundle.getParcelableArrayList<UserModel>("item")
 
-            item?.let {
-                if (it !in testList) {
-                    testList.add(it)
-                    listAdapter.addItemNS(it)
+            Log.d("FitemList", itemList.toString())
+
+            if (itemList != null) {
+                for(item in itemList){
+                    if(item.favorites == true && item !in testList){
+                        testList.add(item)
+                        listAdapter.addFItem(item)
+                    }else if(item.favorites == false){
+                        testList.remove(item)
+                        listAdapter.deleteFItem(item)
+                    }
                 }
             }
 
-            Log.d("item", "$item")
-            Log.d("position", "$position")
+            Log.d("testList", testList.toString())
+
         }
 
         listAdapter.addItems(testList)
+
+        listAdapter.itemClick = object : ContactListAdapter.ItemClick {
+            override fun onClick(view: View, position: Int) {
+                listAdapter.deleteItem(position)
+                setFragmentResult("favorite", bundleOf("removedata" to testList[position]))
+                Log.d("removedata", testList[position].toString())
+            }
+        }
 
         listAdapter.itemClick2 = object : ContactListAdapter.ItemClick {
             override fun onClick(view: View, position: Int) {
