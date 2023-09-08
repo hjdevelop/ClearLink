@@ -46,8 +46,6 @@ class ContactListInnerFavoritesFragment : Fragment() {
             val item = bundle.getParcelable<UserModel>("item")
             val position = bundle.getInt("position", 0)
 
-//            listAdapter.addItemNS(item)
-
             item?.let {
                 if (it !in testList) {
                     testList.add(it)
@@ -67,9 +65,7 @@ class ContactListInnerFavoritesFragment : Fragment() {
                 val intent = Intent(view.context, ContactDetailFragment::class.java)
                 intent.putExtra("item", testList[position])
 
-
                 view.context.startActivity(intent) // 액티비티 시작
-
 
             }
         }
@@ -81,10 +77,22 @@ class ContactListInnerFavoritesFragment : Fragment() {
         Log.d("test3 : resume","")
     }
 
-    override fun onPause() {
-        super.onPause()
-        Log.d("test4 : Pause","")
-    }
+//    override fun onPause() {
+//        super.onPause()
+//        setFragmentResultListener("deleteKey") { deleteKey, bundle ->
+//            val item = bundle.getParcelable<UserModel>("item")
+//            val count = bundle.getInt("count", 0)
+//
+//            item?.let {
+//                if (it in testList) {
+//                    testList.removeAt(count)
+//                    listAdapter.deleteItem(count)
+//                }
+//            }
+//
+//            Log.d("test : count", "$count")
+//        }
+//    }
 
     private fun initView() = with(binding) {
 

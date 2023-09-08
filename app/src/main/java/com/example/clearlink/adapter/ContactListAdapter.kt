@@ -29,10 +29,13 @@ class ContactListAdapter : RecyclerView.Adapter<ContactListAdapter.ViewHolder>()
         fun onClick(view: View, position: Int)
     }
 
-    //좋아요 클릭
+    // 좋아요 클릭
     var itemClick: ItemClick? = null
-    //페이지 이동 클릭
+    // 페이지 이동 클릭
     var itemClick2: ItemClick? = null
+    // 연락처 삭제 클릭
+    var itemLongClick: ItemClick? = null
+
     fun addItems(items: List<UserModel>) {
         list.addAll(items)
         notifyDataSetChanged()
@@ -51,6 +54,14 @@ class ContactListAdapter : RecyclerView.Adapter<ContactListAdapter.ViewHolder>()
         notifyDataSetChanged()
     }
 
+    fun deleteItem(position: Int?){
+        if (position != null) {
+            list.removeAt(position)
+        }
+        notifyDataSetChanged()
+    }
+
+
     inner class ViewHolder(
         private val binding: RvItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
@@ -66,6 +77,11 @@ class ContactListAdapter : RecyclerView.Adapter<ContactListAdapter.ViewHolder>()
             }
 
             swipeLayout = binding.contactListRecyclerviewLayout
+
+            binding.root.setOnLongClickListener {
+                itemLongClick?.onClick(it, adapterPosition)
+                true
+            }
         }
 
         fun bind(item: UserModel) = with(binding) {
