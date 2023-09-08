@@ -18,18 +18,22 @@
     <string name="userPhoneNumber">010-1234-1234</string>
     <string name="textEmail">Email</string>
     <string name="userEmailAddress">team15@gmail.com</string>
-    <string name="textEvent">Event</string>
-    <string name="userEvent">이벤트 Text를 넣을 공간</string>
+    <string name="textMemo">Memo</string>
+    <string name="userMemo">Memo Text를 넣을 공간</string>
 
     <!--toolbar_layout.xml-->
     <string name="toolbarLayout_title">타이틀</string>
 
-    <!--fragment_dialog_add_contact.xml-->
+    <!--dialog_add_contact.xml-->
     <string name="addContactFragmentDialog_add"><u>추가</u></string>
     <string name="addContactFragmentDialog_name">이름</string>
     <string name="addContactFragmentDialog_phoneNumber">전화번호</string>
     <string name="addContactFragmentDialog_email">이메일</string>
+    <string name="addContactFragmentDialog_memo">메모</string>
     <string name="addContactFragmentDialog_event">이벤트</string>
+    <string name="addContactFragmentDialog_10">10분</string>
+    <string name="addContactFragmentDialog_20">20분</string>
+    <string name="addContactFragmentDialog_30">30분</string>
     <string name="addContactFragmentDialog_cancel">취소</string>
     <string name="addContactFragmentDialog_save">저장</string>
     <!-- TODO: Remove or change this placeholder text -->
