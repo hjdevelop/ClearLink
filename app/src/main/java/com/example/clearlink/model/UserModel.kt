@@ -10,7 +10,7 @@ data class UserModel(
     val name: String,
     val phoneNumber: String,
     val email : String,
-    val favoritesImg: Int,
+    var favoritesImg: Int,
     var favorites: Boolean,
     val memo: String,
     val event: Int

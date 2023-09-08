@@ -14,6 +14,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
+import androidx.fragment.app.setFragmentResultListener
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -48,6 +49,7 @@ class ContactListInnerFragment : Fragment() {
     private val binding get() = _binding!!
 
     val datalist = arrayListOf<UserModel>()
+    val sendlist = arrayListOf<UserModel>()
 
     private val listAdapter by lazy {
         ContactListAdapter()
@@ -210,15 +212,28 @@ class ContactListInnerFragment : Fragment() {
 
         }
 
-        // 별 클릭시 즐겨찾기에 연락처 추가 로직
+
         listAdapter.itemClick = object : ContactListAdapter.ItemClick {
             override fun onClick(view: View, position: Int) {
+                datalist[position].favorites = !datalist[position].favorites
+                listAdapter.notifyItemChanged(position)
 
-                val item = datalist[position]
-                val position = position
-                if(!item.favorites) {
-                    count += 1
-                    setFragmentResult("requestKey", bundleOf("item" to item, "position" to position))
+                setFragmentResult("requestKey", bundleOf("item" to datalist))
+            }
+        }
+
+        setFragmentResultListener("favorite") { requestKey, bundle ->
+            val removedata = bundle.getParcelableArrayList<UserModel>("removedata")
+
+            Log.d("Inremovedata", removedata.toString())
+
+            if (removedata != null) {
+                for(data in removedata){
+                    Log.d("Indata", data.toString())
+                    val poisition = datalist.indexOf(data)
+                    Log.d("Inposition", poisition.toString())
+                    datalist[poisition].favorites = false
+                    listAdapter.updateItem(poisition)
                 }
             }
         }
