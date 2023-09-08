@@ -140,13 +140,13 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
-                android:id="@+id/addContactDialog_event_textView"
+                android:id="@+id/addContactDialog_memo_textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="60dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="60dp"
-                android:text="@string/addContactFragmentDialog_event"
+                android:text="@string/addContactFragmentDialog_memo"
                 android:textColor="@color/blue"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -158,7 +158,7 @@
                 android:layout_marginEnd="60dp">
 
                 <EditText
-                    android:id="@+id/addContactDialog_event_editText"
+                    android:id="@+id/addContactDialog_memo_editText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/ic_rouded_corner_edittext"
@@ -166,12 +166,68 @@
                     android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <TextView
+                android:id="@+id/addContactDialog_event_textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="60dp"
+                android:text="@string/addContactFragmentDialog_event"
+                android:textColor="@color/blue"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <RadioGroup
+                android:id="@+id/addContactDialog_event_radioGroup1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="60dp"
+                android:layout_marginEnd="60dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/addContactDialog_event_radioButton1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_radio_button"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/addContactFragmentDialog_10"
+                    android:textColor="@drawable/selector_radio_text" />
+
+                <RadioButton
+                    android:id="@+id/addContactDialog_event_radioButton2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_radio_button"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/addContactFragmentDialog_20"
+                    android:textColor="@drawable/selector_radio_text" />
+
+                <RadioButton
+                    android:id="@+id/addContactDialog_event_radioButton3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_radio_button"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/addContactFragmentDialog_30"
+                    android:textColor="@drawable/selector_radio_text" />
+            </RadioGroup>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginTop="40dp"
-                android:layout_marginBottom="20dp">
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal">
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/addContactDialog_cancel_button"
@@ -196,7 +252,6 @@
                     android:textColor="@color/white" />
 
             </LinearLayout>
-
 
 
         </LinearLayout>
