@@ -1,6 +1,8 @@
 package com.example.clearlink
 
 
+import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -8,6 +10,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -20,9 +23,14 @@ class ContactListInnerFragment : Fragment() {
 
     private var _binding: FragmentContactListInnerBinding? = null
     private val binding get() = _binding!!
+
     val datalist = arrayListOf<UserModel>()
+
     private val listAdapter by lazy {
         ContactListAdapter()
+    }
+    companion object {
+        private var count = -1
     }
 
     private val testList = arrayListOf<UserModel>()
@@ -156,7 +164,7 @@ class ContactListInnerFragment : Fragment() {
 
         listAdapter.addItems(datalist)
 
-        //데이터 전달 로직
+        // 데이터 전달 로직
         listAdapter.itemClick2 = object : ContactListAdapter.ItemClick {
             override fun onClick(view: View, position: Int) {
 
@@ -168,14 +176,45 @@ class ContactListInnerFragment : Fragment() {
             }
         }
 
-        //         별 클릭시 즐겨찾기에 연락처 추가 로직
+        // 별 클릭시 즐겨찾기에 연락처 추가 로직
         listAdapter.itemClick = object : ContactListAdapter.ItemClick {
             override fun onClick(view: View, position: Int) {
+
                 val item = datalist[position]
                 val position = position
                 if(!item.favorites) {
+                    count += 1
                     setFragmentResult("requestKey", bundleOf("item" to item, "position" to position))
                 }
+            }
+        }
+
+        // 롱 클릭시 연락처 삭제 로직
+        listAdapter.itemLongClick = object : ContactListAdapter.ItemClick {
+            override fun onClick(view: View, position: Int) {
+                val builder = AlertDialog.Builder(requireContext())
+                builder.setTitle("연락처 삭제")
+                builder.setMessage("정말 삭제하시겠습니까?")
+                builder.setIcon(R.drawable.ic_clearlink)
+
+                val listener = object : DialogInterface.OnClickListener{
+                    override fun onClick(p0: DialogInterface?, p1: Int) {
+                        when (p1) {
+                            DialogInterface.BUTTON_POSITIVE -> {
+                                val item = datalist[position]
+                                setFragmentResult("deleteKey", bundleOf("item" to item, "count" to count))
+                                listAdapter.deleteItem(position)
+                                datalist.removeAt(position)
+                            }
+                            DialogInterface.BUTTON_NEGATIVE -> return
+                        }
+                    }
+                }
+                builder.setPositiveButton("삭제", listener)
+                builder.setNegativeButton("취소", null)
+                builder.show()
+
+
             }
         }
     }
