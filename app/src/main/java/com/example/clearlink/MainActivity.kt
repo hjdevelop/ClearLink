@@ -2,11 +2,12 @@ package com.example.clearlink
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.example.clearlink.adapter.ViewPagerAdapter
 import com.example.clearlink.databinding.ActivityMainBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), DataPassListener{
 
     lateinit var binding: ActivityMainBinding
 
@@ -33,6 +34,12 @@ class MainActivity : AppCompatActivity() {
             tab.setIcon(tabIcon[position])
         }.attach()
 
+    }
+
+    override fun onDataPassed(data: Int) {
+        val contactListFragment = viewPagerAdapter.getFrag() as ContactListFragment
+        contactListFragment.receiveData(data)
+        Log.d("Main data", data.toString())
     }
 
 }
