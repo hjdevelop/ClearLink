@@ -17,7 +17,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 class ContactListFragment : Fragment(){
 
-    val MyProfile = UserModel(Uri.parse("android.resource://" + "com.example.clearlink" + "/" + R.drawable.sample_0), "이호식", "010-1234-1234", "team15@gmail.com", R.drawable.ic_star, false, "EVENT TEXT")
+    val MyProfile = UserModel(Uri.parse("android.resource://" + "com.example.clearlink" + "/" + R.drawable.sample_2), "이호식", "010-1234-1234", "team15@gmail.com", R.drawable.ic_star, false, "MEMO TEXT", 0)
 
 
     private var _binding: FragmentContactListBinding? = null

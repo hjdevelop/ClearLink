@@ -1,6 +1,9 @@
 package com.example.clearlink
 
+import android.app.Activity.ALARM_SERVICE
 import android.app.Activity.RESULT_OK
+import android.app.AlarmManager
+import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.Intent.ACTION_PICK
@@ -10,12 +13,14 @@ import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.SystemClock
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.DialogFragment
@@ -28,6 +33,7 @@ class AddContactDialog : DialogFragment() {
     private var _binding: DialogAddContactBinding? = null
     private val binding get() = _binding!!
     private var imageUri: Uri? = null
+    private var checkedEvent: Int = 0
 
     interface DailogResult{
         fun finish(result: UserModel)
@@ -76,16 +82,34 @@ class AddContactDialog : DialogFragment() {
             val name = binding.addContactDialogNameEditText.text.toString()
             val phonenumber = binding.addContactDialogTelEditText.text.toString()
             val email = binding.addContactDialogEmailEditText.text.toString()
-            val event = binding.addContactDialogEventEditText.text.toString()
+            val memo = binding.addContactDialogMemoEditText.text.toString()
 
             if(imageUri == null){
-                val UserProfile = UserModel(Uri.parse("android.resource://" + context?.packageName + "/" + R.drawable.ic_mypage), name, phonenumber, email, R.drawable.ic_star, false, event)
+                val UserProfile = UserModel(Uri.parse("android.resource://" + context?.packageName + "/" + R.drawable.ic_mypage), name, phonenumber, email, R.drawable.ic_star, false, memo, checkedEvent)
                 DialogResult?.finish(UserProfile)
             }else{
-                val UserProfile = UserModel(imageUri, name, phonenumber, email, R.drawable.ic_star, false, event)
+                val UserProfile = UserModel(imageUri, name, phonenumber, email, R.drawable.ic_star, false, memo, checkedEvent)
                 DialogResult?.finish(UserProfile)
             }
 
+            if(checkedEvent != 0) {
+                val alarmManager = requireContext().getSystemService(ALARM_SERVICE) as AlarmManager
+
+                val intent = Intent(requireContext(),AlarmReceiver::class.java)
+                val pendingIntent = PendingIntent.getBroadcast(
+                    requireContext(), 0, intent,
+                    PendingIntent.FLAG_UPDATE_CURRENT
+                )
+
+                val triggerTime = (SystemClock.elapsedRealtime() + checkedEvent * 1000)
+                alarmManager.set(
+                    AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                    triggerTime,
+                    pendingIntent
+                )
+                "${name}님께 연락할 수 있도록 ${checkedEvent}초 후에 알림"
+                Toast.makeText(requireContext(), "${name}님께 연락할 수 있도록 ${checkedEvent}초 후에 알림", Toast.LENGTH_SHORT).show()
+            }
             dismiss()
         }
 
@@ -126,12 +150,26 @@ class AddContactDialog : DialogFragment() {
             }
         })
 
+        binding.addContactDialogEventRadioGroup1.setOnCheckedChangeListener { group, checkedId ->
+            when (checkedId) {
+                R.id.addContactDialog_event_radioButton1 -> {
+                    checkedEvent = 10
+                }
+                R.id.addContactDialog_event_radioButton2 -> {
+                    checkedEvent = 20
+                }
+                R.id.addContactDialog_event_radioButton3 -> {
+                    checkedEvent = 30
+                }
+            }
+        }
+
         return view
     }
 
     override fun onResume() {
         super.onResume()
-        context?.dialogFragmentResize(this@AddContactDialog, 0.9f, 0.9f)
+        context?.dialogFragmentResize(this@AddContactDialog, 0.9f, 0.7f)
     }
 
     private fun Context.dialogFragmentResize(dialogFragment: DialogFragment, width: Float, height: Float) {
@@ -186,10 +224,8 @@ class AddContactDialog : DialogFragment() {
             return false
         }
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
 }
