@@ -102,7 +102,7 @@ class AddContactDialog : DialogFragment() {
                 )
 
                 val triggerTime = (SystemClock.elapsedRealtime() + checkedEvent * 1000)
-                alarmManager.set(
+                alarmManager.setExact(
                     AlarmManager.ELAPSED_REALTIME_WAKEUP,
                     triggerTime,
                     pendingIntent
