@@ -51,7 +51,8 @@ class ContactListInnerFragment : Fragment() {
                 "aaa@aaa.com",
                 R.drawable.ic_star,
                 false,
-                "a입니다."
+                "a입니다.",
+                0
             )
         )
         datalist.add(
@@ -62,7 +63,8 @@ class ContactListInnerFragment : Fragment() {
                 "bbb@bbb.com",
                 R.drawable.ic_star,
                 false,
-                "b입니다."
+                "b입니다.",
+                0
             )
         )
         datalist.add(
@@ -73,7 +75,8 @@ class ContactListInnerFragment : Fragment() {
                 "ccc@ccc.com",
                 R.drawable.ic_star,
                 false,
-                "c입니다."
+                "c입니다.",
+                0
             )
         )
         datalist.add(
@@ -84,7 +87,8 @@ class ContactListInnerFragment : Fragment() {
                 "ddd@ddd.com",
                 R.drawable.ic_star,
                 false,
-                "d입니다."
+                "d입니다.",
+                0
             )
         )
         datalist.add(
@@ -95,7 +99,8 @@ class ContactListInnerFragment : Fragment() {
                 "eee@eee.com",
                 R.drawable.ic_star,
                 false,
-                "e입니다."
+                "e입니다.",
+                0
             )
         )
         datalist.add(
@@ -106,7 +111,8 @@ class ContactListInnerFragment : Fragment() {
                 "fff@fff.com",
                 R.drawable.ic_star,
                 false,
-                "f입니다."
+                "f입니다.",
+                0
             )
         )
         datalist.add(
@@ -117,7 +123,8 @@ class ContactListInnerFragment : Fragment() {
                 "ggg@ggg.com",
                 R.drawable.ic_star,
                 false,
-                "g입니다."
+                "g입니다.",
+                0
             )
         )
         datalist.add(
@@ -128,7 +135,8 @@ class ContactListInnerFragment : Fragment() {
                 "hhh@hhh.com",
                 R.drawable.ic_star,
                 false,
-                "h입니다."
+                "h입니다.",
+                0
             )
         )
         datalist.add(
@@ -139,7 +147,8 @@ class ContactListInnerFragment : Fragment() {
                 "yyy@yyy.com",
                 R.drawable.ic_star,
                 false,
-                "y입니다."
+                "y입니다.",
+                0
             )
         )
         datalist.add(
@@ -150,7 +159,8 @@ class ContactListInnerFragment : Fragment() {
                 "xxx@xxx.com",
                 R.drawable.ic_star,
                 false,
-                "x입니다."
+                "x입니다.",
+                0
             )
         )
 

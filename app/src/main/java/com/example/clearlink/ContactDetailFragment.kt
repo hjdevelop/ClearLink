@@ -26,7 +26,7 @@ class ContactDetailFragment : AppCompatActivity() {
         binding.contactDetailFragmentName.text = item.name
         binding.contactDetailFragmentTvUserphone.text=item.phoneNumber
         binding.contactDetailFragmentTvUseremail.text=item.email
-        binding.contactDetailFragmentTvUserevent.text=item.event
+        binding.contactDetailFragmentTvUsermemo.text=item.memo
 
         val myButton = findViewById<Button>(R.id.contact_detail_fragment_btn)
 

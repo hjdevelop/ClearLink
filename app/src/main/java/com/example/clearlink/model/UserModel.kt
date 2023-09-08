@@ -12,5 +12,6 @@ data class UserModel(
     val email : String,
     val favoritesImg: Int,
     var favorites: Boolean,
-    val event: String
+    val memo: String,
+    val event: Int
 ) : Parcelable

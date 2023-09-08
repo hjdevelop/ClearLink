@@ -43,7 +43,7 @@ class MyPageFragment : Fragment() {
                 myPageFragmentName.text = myProfile.name
                 myPageFragmentTvUserphone.text = myProfile.phoneNumber
                 myPageFragmentTvUseremail.text = myProfile.email
-                myPageFragmentTvUserevent.text = myProfile.event
+                myPageFragmentTvUsermemo.text = myProfile.memo
             }
         }
 
