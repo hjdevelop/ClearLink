@@ -4,6 +4,7 @@ import android.app.Activity.ALARM_SERVICE
 import android.app.Activity.RESULT_OK
 import android.app.AlarmManager
 import android.app.PendingIntent
+import android.app.PendingIntent.FLAG_IMMUTABLE
 import android.content.Context
 import android.content.Intent
 import android.content.Intent.ACTION_PICK
@@ -98,7 +99,7 @@ class AddContactDialog : DialogFragment() {
                 val intent = Intent(requireContext(),AlarmReceiver::class.java)
                 val pendingIntent = PendingIntent.getBroadcast(
                     requireContext(), 0, intent,
-                    PendingIntent.FLAG_UPDATE_CURRENT
+                    PendingIntent.FLAG_UPDATE_CURRENT or FLAG_IMMUTABLE
                 )
 
                 val triggerTime = (SystemClock.elapsedRealtime() + checkedEvent * 1000)
