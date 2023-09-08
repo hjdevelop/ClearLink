@@ -3,6 +3,7 @@ package com.example.clearlink
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
+import android.app.PendingIntent.FLAG_IMMUTABLE
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -43,7 +44,7 @@ class AlarmReceiver : BroadcastReceiver() {
             context,
             0,
             contentIntent,
-            PendingIntent.FLAG_UPDATE_CURRENT
+            PendingIntent.FLAG_UPDATE_CURRENT or FLAG_IMMUTABLE
         )
 
         val builder = NotificationCompat.Builder(context, "channel_event")
