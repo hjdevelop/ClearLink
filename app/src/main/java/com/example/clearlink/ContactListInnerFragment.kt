@@ -15,6 +15,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.clearlink.adapter.ContactListAdapter
@@ -249,7 +250,7 @@ class ContactListInnerFragment : Fragment() {
         itemTouchHelper.attachToRecyclerView(binding.contactListInnerFragmentRecyclerview)
 
         contactListInnerFragmentRecyclerview.adapter = listAdapter
-        contactListInnerFragmentRecyclerview.layoutManager = LinearLayoutManager(requireContext())
+        contactListInnerFragmentRecyclerview.layoutManager = GridLayoutManager(requireContext(), 1)
         contactListInnerFragmentRecyclerview.addItemDecoration(
             DividerItemDecoration(
                 contactListInnerFragmentRecyclerview.context,

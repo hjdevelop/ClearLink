@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.setFragmentResultListener
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.clearlink.adapter.ContactListAdapter
 import com.example.clearlink.databinding.FragmentContactListInnerFavoritesBinding
@@ -97,7 +98,7 @@ class ContactListInnerFavoritesFragment : Fragment() {
     private fun initView() = with(binding) {
 
         contactListInnerFavoritesFragmentRecyclerview.adapter = listAdapter
-        contactListInnerFavoritesFragmentRecyclerview.layoutManager = LinearLayoutManager(requireContext())
+        contactListInnerFavoritesFragmentRecyclerview.layoutManager = GridLayoutManager(requireContext(), 1)
         contactListInnerFavoritesFragmentRecyclerview.addItemDecoration(
             DividerItemDecoration(
                 contactListInnerFavoritesFragmentRecyclerview.context,
