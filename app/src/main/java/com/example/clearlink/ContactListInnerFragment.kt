@@ -1,25 +1,45 @@
 package com.example.clearlink
 
 
-import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.clearlink.adapter.ContactListAdapter
 import com.example.clearlink.databinding.FragmentContactListInnerBinding
 import com.example.clearlink.model.UserModel
 
+
+interface DataPassListener {
+    fun onDataPassed(data: Int)
+}
+
 class ContactListInnerFragment : Fragment() {
+
+
+
+    private var dataPassListener: DataPassListener? = null
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        // 활동(Activity)로부터 인터페이스 구현체를 가져옴
+        dataPassListener = context as DataPassListener
+    }
+
+    // 데이터를 전달하는 함수
+    private fun passData(data: Int) {
+        dataPassListener?.onDataPassed(data)
+    }
 
     private var _binding: FragmentContactListInnerBinding? = null
     private val binding get() = _binding!!
@@ -32,8 +52,6 @@ class ContactListInnerFragment : Fragment() {
     companion object {
         private var count = -1
     }
-
-    private val testList = arrayListOf<UserModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -162,6 +180,8 @@ class ContactListInnerFragment : Fragment() {
             )
         )
 
+        passData(datalist.size)
+
         listAdapter.addItems(datalist)
 
         // 데이터 전달 로직
@@ -174,6 +194,7 @@ class ContactListInnerFragment : Fragment() {
                 view.context.startActivity(intent) // 액티비티 시작
 
             }
+
         }
 
         // 별 클릭시 즐겨찾기에 연락처 추가 로직
@@ -218,7 +239,11 @@ class ContactListInnerFragment : Fragment() {
             }
         }
     }
+
     private fun initView() = with(binding) {
+
+        val itemTouchHelper = ItemTouchHelper(MyItemTouchHelperCallback(listAdapter))
+        itemTouchHelper.attachToRecyclerView(binding.contactListInnerFragmentRecyclerview)
 
         contactListInnerFragmentRecyclerview.adapter = listAdapter
         contactListInnerFragmentRecyclerview.layoutManager = LinearLayoutManager(requireContext())
@@ -236,9 +261,11 @@ class ContactListInnerFragment : Fragment() {
                 override fun finish(result: UserModel) {
                     listAdapter.addItem(result)
                     datalist.add(result)
+                    passData(datalist.size)
                 }
             })
         }
+
     }
 
     override fun onDestroyView() {

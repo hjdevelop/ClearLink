@@ -57,6 +57,8 @@ class ContactListInnerFavoritesFragment : Fragment() {
             Log.d("position", "$position")
         }
 
+        listAdapter.addItems(testList)
+
         listAdapter.itemClick2 = object : ContactListAdapter.ItemClick {
             override fun onClick(view: View, position: Int) {
 
