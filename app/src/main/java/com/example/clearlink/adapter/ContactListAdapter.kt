@@ -57,11 +57,7 @@ class ContactListAdapter : RecyclerView.Adapter<ContactListAdapter.ViewHolder>()
     }
 
     fun addFItem(item: UserModel){
-        if(item !in list && item.favorites == true){
-            list.add(item)
-        }else if(item.favorites != true){
-            list.remove(item)
-        }
+        list.add(item)
         notifyDataSetChanged()
     }
 
@@ -77,12 +73,11 @@ class ContactListAdapter : RecyclerView.Adapter<ContactListAdapter.ViewHolder>()
         notifyDataSetChanged()
     }
 
-    fun getlist(): ArrayList<UserModel> {
-        return list
+    fun getlist(position: Int): UserModel {
+        return list[position]
     }
 
     fun updateItem(position: Int){
-        list[position].favorites = false
         Log.d("Alist", list[position].toString())
         notifyDataSetChanged()
     }
@@ -97,7 +92,6 @@ class ContactListAdapter : RecyclerView.Adapter<ContactListAdapter.ViewHolder>()
         init {
             binding.contactListRecyclerviewFavorites.setOnClickListener {
                 itemClick?.onClick(it, adapterPosition)
-                notifyItemChanged(adapterPosition)
             }
 
             swipeLayout = binding.contactListRecyclerviewLayout
@@ -162,13 +156,11 @@ class ContactListAdapter : RecyclerView.Adapter<ContactListAdapter.ViewHolder>()
             intent.data = Uri.parse("tel:${list[position].phoneNumber}")
 
             try {
-                // 전화를 시도
+                //전화 시도
                 context.startActivity(intent)
             } catch (e: SecurityException) {
                 e.printStackTrace()
             }
-
-            // 전화 시도 후, 아이템 레이아웃 초기화 및 RecyclerView 갱신
             notifyDataSetChanged()
         }
     }

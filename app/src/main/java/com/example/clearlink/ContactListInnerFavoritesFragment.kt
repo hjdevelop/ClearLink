@@ -22,6 +22,7 @@ class ContactListInnerFavoritesFragment : Fragment() {
     companion object {
         fun newInstance() = ContactListInnerFavoritesFragment()
         val testList = arrayListOf<UserModel>()
+        var sendList = arrayListOf<UserModel>()
     }
 
     private var _binding: FragmentContactListInnerFavoritesBinding? = null
@@ -46,9 +47,11 @@ class ContactListInnerFavoritesFragment : Fragment() {
         initView()
 
         setFragmentResultListener("requestKey") { requestKey, bundle ->
-            val itemList = bundle.getParcelableArrayList<UserModel>("item")
+            val itemList = bundle.getParcelableArrayList<UserModel>("item")!!
 
             Log.d("FitemList", itemList.toString())
+
+            sendList.clear()
 
             if (itemList != null) {
                 for(item in itemList){
@@ -70,9 +73,15 @@ class ContactListInnerFavoritesFragment : Fragment() {
 
         listAdapter.itemClick = object : ContactListAdapter.ItemClick {
             override fun onClick(view: View, position: Int) {
+
+                sendList.add(listAdapter.getlist(position))
+
+                setFragmentResult("favorite", bundleOf("removedata" to sendList))
+                Log.d("sendlist", sendList.toString())
+
+                testList.remove(listAdapter.getlist(position))
+                Log.d("testList", testList.toString())
                 listAdapter.deleteItem(position)
-                setFragmentResult("favorite", bundleOf("removedata" to testList[position]))
-                Log.d("removedata", testList[position].toString())
             }
         }
 

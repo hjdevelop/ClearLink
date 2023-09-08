@@ -212,22 +212,30 @@ class ContactListInnerFragment : Fragment() {
 
         }
 
-        // 별 클릭시 즐겨찾기에 연락처 추가 로직
+
         listAdapter.itemClick = object : ContactListAdapter.ItemClick {
             override fun onClick(view: View, position: Int) {
-
                 datalist[position].favorites = !datalist[position].favorites
+                listAdapter.notifyItemChanged(position)
+
                 setFragmentResult("requestKey", bundleOf("item" to datalist))
             }
         }
 
         setFragmentResultListener("favorite") { requestKey, bundle ->
-            val removedata = bundle.getParcelable<UserModel>("removedata")
+            val removedata = bundle.getParcelableArrayList<UserModel>("removedata")
 
-            val poisition = datalist.indexOf(removedata)
-            Log.d("Rpoistion", poisition.toString())
-            datalist[poisition].favorites = true
-            listAdapter.updateItem(poisition)
+            Log.d("Inremovedata", removedata.toString())
+
+            if (removedata != null) {
+                for(data in removedata){
+                    Log.d("Indata", data.toString())
+                    val poisition = datalist.indexOf(data)
+                    Log.d("Inposition", poisition.toString())
+                    datalist[poisition].favorites = false
+                    listAdapter.updateItem(poisition)
+                }
+            }
         }
 
         // 롱 클릭시 연락처 삭제 로직
