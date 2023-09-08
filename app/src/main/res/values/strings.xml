@@ -29,6 +29,7 @@
     <string name="addContactFragmentDialog_name">이름</string>
     <string name="addContactFragmentDialog_phoneNumber">전화번호</string>
     <string name="addContactFragmentDialog_email">이메일</string>
+    <string name="addContactFragmentDialog_email_warning">이메일 양식을 확인해주세요</string>
     <string name="addContactFragmentDialog_memo">메모</string>
     <string name="addContactFragmentDialog_event">이벤트</string>
     <string name="addContactFragmentDialog_10">10분</string>
