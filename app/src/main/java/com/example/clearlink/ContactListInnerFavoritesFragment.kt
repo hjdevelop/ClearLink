@@ -46,13 +46,13 @@ class ContactListInnerFavoritesFragment : Fragment() {
 
         initView()
 
-        setFragmentResultListener("deleteKey") { deleteKey, bundle ->
-                val item = bundle.getParcelable<UserModel>("item")
-                if (item != null) {
-                    val position = testList.indexOf(item)
-                    listAdapter.deleteItem(position)
-                }
-            }
+//        setFragmentResultListener("deleteKey") { deleteKey, bundle ->
+//                val item = bundle.getParcelable<UserModel>("item")
+//                if (item != null) {
+//                    val position = testList.indexOf(item)
+//                    listAdapter.deleteItem(position)
+//                }
+//            }
 
 
         setFragmentResultListener("requestKey") { requestKey, bundle ->
