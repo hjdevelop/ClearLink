@@ -30,8 +30,6 @@ interface DataPassListener {
 
 class ContactListInnerFragment : Fragment() {
 
-
-
     private var dataPassListener: DataPassListener? = null
 
     override fun onAttach(context: Context) {
@@ -216,7 +214,8 @@ class ContactListInnerFragment : Fragment() {
         listAdapter.itemClick = object : ContactListAdapter.ItemClick {
             override fun onClick(view: View, position: Int) {
                 datalist[position].favorites = !datalist[position].favorites
-                listAdapter.notifyItemChanged(position)
+
+                listAdapter.notifyDataSetChanged()
 
                 setFragmentResult("requestKey", bundleOf("item" to datalist))
             }
@@ -228,7 +227,7 @@ class ContactListInnerFragment : Fragment() {
             Log.d("Inremovedata", removedata.toString())
 
             if (removedata != null) {
-                for(data in removedata){
+                for (data in removedata) {
                     Log.d("Indata", data.toString())
                     val poisition = datalist.indexOf(data)
                     Log.d("Inposition", poisition.toString())
@@ -251,7 +250,7 @@ class ContactListInnerFragment : Fragment() {
                         when (p1) {
                             DialogInterface.BUTTON_POSITIVE -> {
                                 val item = datalist[position]
-                                setFragmentResult("deleteKey", bundleOf("item" to item, "count" to count))
+                                setFragmentResult("deleteKey", bundleOf("item" to item))
                                 listAdapter.deleteItem(position)
                                 datalist.removeAt(position)
                                 passData(datalist.size)
@@ -260,11 +259,10 @@ class ContactListInnerFragment : Fragment() {
                         }
                     }
                 }
+
                 builder.setPositiveButton("삭제", listener)
                 builder.setNegativeButton("취소", null)
                 builder.show()
-
-
             }
         }
     }

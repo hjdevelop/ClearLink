@@ -1,5 +1,6 @@
 package com.example.clearlink
 
+import android.annotation.SuppressLint
 import android.app.Activity.ALARM_SERVICE
 import android.app.Activity.RESULT_OK
 import android.app.AlarmManager
@@ -58,6 +59,7 @@ class AddContactDialog : DialogFragment() {
         }
     }
 
+    @SuppressLint("ScheduleExactAlarm")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
