@@ -1,16 +1,23 @@
 package com.example.clearlink
 
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
@@ -31,6 +38,7 @@ interface DataPassListener {
 class ContactListInnerFragment : Fragment() {
 
     private var dataPassListener: DataPassListener? = null
+    private var contactList: ArrayList<Map<String, String>>? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -47,10 +55,9 @@ class ContactListInnerFragment : Fragment() {
     private val binding get() = _binding!!
 
     val datalist = arrayListOf<UserModel>()
-    val sendlist = arrayListOf<UserModel>()
 
     private val listAdapter by lazy {
-        ContactListAdapter()
+        ContactListAdapter(datalist)
     }
     companion object {
         private var count = -1
@@ -70,132 +77,7 @@ class ContactListInnerFragment : Fragment() {
 
         initView()
 
-        // 더미데이터 생성
 
-        datalist.add(
-            UserModel(
-                Uri.parse("android.resource://" + "com.example.clearlink" + "/" + R.drawable.sample_0),
-                "김김김",
-                "010-0000-0000",
-                "aaa@aaa.com",
-                R.drawable.ic_star,
-                false,
-                "a입니다.",
-                0
-            )
-        )
-        datalist.add(
-            UserModel(
-                Uri.parse("android.resource://" + "com.example.clearlink" + "/" + R.drawable.sample_1),
-                "이이이",
-                "010-1111-1111",
-                "bbb@bbb.com",
-                R.drawable.ic_star,
-                false,
-                "b입니다.",
-                0
-            )
-        )
-        datalist.add(
-            UserModel(
-                Uri.parse("android.resource://" + "com.example.clearlink" + "/" + R.drawable.sample_2),
-                "박박박",
-                "010-2222-2222",
-                "ccc@ccc.com",
-                R.drawable.ic_star,
-                false,
-                "c입니다.",
-                0
-            )
-        )
-        datalist.add(
-            UserModel(
-                Uri.parse("android.resource://" + "com.example.clearlink" + "/" + R.drawable.sample_3),
-                "최최최",
-                "010-3333-3333",
-                "ddd@ddd.com",
-                R.drawable.ic_star,
-                false,
-                "d입니다.",
-                0
-            )
-        )
-        datalist.add(
-            UserModel(
-                Uri.parse("android.resource://" + "com.example.clearlink" + "/" + R.drawable.sample_4),
-                "정정정",
-                "010-4444-4444",
-                "eee@eee.com",
-                R.drawable.ic_star,
-                false,
-                "e입니다.",
-                0
-            )
-        )
-        datalist.add(
-            UserModel(
-                Uri.parse("android.resource://" + "com.example.clearlink" + "/" + R.drawable.sample_5),
-                "차차차",
-                "010-5555-5555",
-                "fff@fff.com",
-                R.drawable.ic_star,
-                false,
-                "f입니다.",
-                0
-            )
-        )
-        datalist.add(
-            UserModel(
-                Uri.parse("android.resource://" + "com.example.clearlink" + "/" + R.drawable.sample_6),
-                "조조조",
-                "010-6666-6666",
-                "ggg@ggg.com",
-                R.drawable.ic_star,
-                false,
-                "g입니다.",
-                0
-            )
-        )
-        datalist.add(
-            UserModel(
-                Uri.parse("android.resource://" + "com.example.clearlink" + "/" + R.drawable.sample_7),
-                "장장장",
-                "010-7777-7777",
-                "hhh@hhh.com",
-                R.drawable.ic_star,
-                false,
-                "h입니다.",
-                0
-            )
-        )
-        datalist.add(
-            UserModel(
-                Uri.parse("android.resource://" + "com.example.clearlink" + "/" + R.drawable.sample_8),
-                "추추추",
-                "010-8888-9999",
-                "yyy@yyy.com",
-                R.drawable.ic_star,
-                false,
-                "y입니다.",
-                0
-            )
-        )
-        datalist.add(
-            UserModel(
-                Uri.parse("android.resource://" + "com.example.clearlink" + "/" + R.drawable.sample_9),
-                "손손손",
-                "010-8888-9999",
-                "xxx@xxx.com",
-                R.drawable.ic_star,
-                false,
-                "x입니다.",
-                0
-            )
-        )
-
-        passData(datalist.size)
-
-        listAdapter.addItems(datalist)
 
         // 데이터 전달 로직
         listAdapter.itemClick2 = object : ContactListAdapter.ItemClick {
@@ -267,30 +149,150 @@ class ContactListInnerFragment : Fragment() {
         }
     }
 
+    @SuppressLint("Range")
     private fun initView() = with(binding) {
 
-        val itemTouchHelper = ItemTouchHelper(MyItemTouchHelperCallback(listAdapter))
-        itemTouchHelper.attachToRecyclerView(binding.contactListInnerFragmentRecyclerview)
 
-        contactListInnerFragmentRecyclerview.adapter = listAdapter
-        contactListInnerFragmentRecyclerview.layoutManager = GridLayoutManager(requireContext(), 1)
-        contactListInnerFragmentRecyclerview.addItemDecoration(
-            DividerItemDecoration(
-                contactListInnerFragmentRecyclerview.context,
-                LinearLayoutManager.VERTICAL
-            )
-        )
+        //오류 2개 : 연락처에 입력한 메모가 없으면 작동 오류, 버튼 누르면 계속 추가됨..ㅎ
 
         contactListInnerFragmentFab.setOnClickListener {
-            val dialog = AddContactDialog()
-            dialog.show(requireActivity().supportFragmentManager, "AddContactDialog")
-            dialog.setDialogResult(object : AddContactDialog.DailogResult {
-                override fun finish(result: UserModel) {
-                    listAdapter.addItem(result)
-                    datalist.add(result)
-                    passData(datalist.size)
+
+            contactList?.clear()
+
+            // MainActivity.kt 파일 내에서 권한 요청
+            val permission = Manifest.permission.READ_CONTACTS
+            val requestCode = 123 // 원하는 요청 코드
+
+            if (ContextCompat.checkSelfPermission(requireContext(), permission) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(requireActivity(), arrayOf(permission), requestCode)
+            } else {
+                // 권한이 이미 허용되었을 때 실행할 작업을 여기에 추가
+
+                contactList = ArrayList()
+
+                //Content Provider : 어플리케이션 사이에서 Data 를 공유하는 통로 역할, 안드로이드 시스템의 각종 설정값이나 DB 에 접근
+                //contentResovler : 결과를 반환하는 브릿지 역할은 컨텐트 리졸버(Content Resolver)
+
+                //Cursor : 데이터베이스에 저장되어 있는 테이블의 행을 참조하여 데이터 가져옴
+                //query() : 데이터베이스로부터 데이터를 조회할 때 사용
+                //ContactsContract.Contacts.CONTENT_URI : 주소록의 연락처 항목
+                //ContactsContract.Contacts.DISPLAY_NAME_PRIMARY + " asc" : 데이터 정렬 방식, 이름을 오름 차순
+                val c: Cursor? = requireContext().contentResolver.query(
+                    ContactsContract.Contacts.CONTENT_URI,
+                    null, null, null,
+                    ContactsContract.Contacts.DISPLAY_NAME_PRIMARY + " asc"
+                )
+
+                //커서를 다음 항목으로 이동, 항목이 있는 경우에만 실행
+                while (c?.moveToNext() == true) {
+                    val map = HashMap<String, String>()
+                    // 각 연락처 항목의 고유한 식별자인 "아이디(ID)"를 가져오는 코드
+                    val id = c.getString(c.getColumnIndex(ContactsContract.Contacts._ID))
+
+                    //이름 가져오기
+                    val name =
+                        c.getString(c.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME_PRIMARY))
+                    map["name"] = name
+
+                    //ContactsContract.CommonDataKinds.Phone.CONTENT_URI : 연락처의 전화 정보
+                    //projection : 열 가져오는 필터, null : 모든 열
+                    //ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + id, : 특정 연락처의 전화번호, 해당 연락처의 ID와 일치하는 데이터만 검색
+                    val phoneCursor: Cursor? = requireContext().contentResolver.query(
+                        ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                        null,
+                        ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + id,
+                        null, null
+                    )
+
+                    //첫번째 행으로 이동, 행이 존재하면 true : 해당 연락처가 전화번호를 가지고 있는 경우
+                    if (phoneCursor?.moveToFirst() == true) {
+                        //전화번호 가져오기
+                        val number =
+                            phoneCursor.getString(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
+                        map["phone"] = number
+                    }
+
+                    phoneCursor?.close()
+
+                    // 이메일 정보 가져오기
+                    val emailCursor: Cursor? = requireContext().contentResolver.query(
+                        ContactsContract.CommonDataKinds.Email.CONTENT_URI,
+                        null,
+                        ContactsContract.CommonDataKinds.Email.CONTACT_ID + " = " + id,
+                        null, null
+                    )
+
+                    if (emailCursor?.moveToFirst() == true) {
+                        val email =
+                            emailCursor.getString(emailCursor.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA))
+                        map["email"] = email
+                    }
+
+                    emailCursor?.close()
+
+                    // 메모 정보 가져오기
+                    val memoCursor: Cursor? = requireContext().contentResolver.query(
+                        ContactsContract.Data.CONTENT_URI,
+                        null,
+                        ContactsContract.Data.CONTACT_ID + " = ? AND " +
+                                ContactsContract.Data.MIMETYPE + " = ?",
+                        arrayOf(id, ContactsContract.CommonDataKinds.Note.CONTENT_ITEM_TYPE),
+                        null
+                    )
+
+                    if (memoCursor != null) {
+                        if (memoCursor.moveToFirst()) {
+                            val memo =
+                                memoCursor.getString(memoCursor.getColumnIndex(ContactsContract.CommonDataKinds.Note.NOTE))
+                            map["memo"] = memo
+                        } else {
+                            map["memo"] = "" // 데이터가 없을 때 빈 문자열로 초기화
+                        }
+                        memoCursor.close()
+                    } else {
+                        map["memo"] = "" // memoCursor가 null인 경우 빈 문자열로 초기화
+                    }
+
+                    memoCursor?.close()
+
+                    contactList?.add(map)
                 }
-            })
+                c?.close()
+
+                Log.d("dataList", contactList.toString())
+
+                for (data in contactList!!) {
+                    datalist.add(
+                        UserModel(
+                            Uri.parse("android.resource://" + "com.example.clearlink" + "/" + R.drawable.sample_0),
+                            data["name"].toString(),
+                            data["phone"].toString(),
+                            data["email"].toString(),
+                            R.drawable.ic_star,
+                            false,
+                            data["memo"].toString(),
+                            0
+                        )
+                    )
+                }
+
+                Log.d("userlist", datalist.toString())
+
+                val itemTouchHelper = ItemTouchHelper(MyItemTouchHelperCallback(listAdapter))
+                itemTouchHelper.attachToRecyclerView(binding.contactListInnerFragmentRecyclerview)
+
+                contactListInnerFragmentRecyclerview.adapter = listAdapter
+                contactListInnerFragmentRecyclerview.layoutManager =
+                    GridLayoutManager(requireContext(), 1)
+                contactListInnerFragmentRecyclerview.addItemDecoration(
+                    DividerItemDecoration(
+                        contactListInnerFragmentRecyclerview.context,
+                        LinearLayoutManager.VERTICAL
+                    )
+                )
+
+                passData(datalist.size)
+            }
         }
 
     }

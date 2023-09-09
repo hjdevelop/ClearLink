@@ -21,9 +21,8 @@ import com.example.clearlink.R
 import com.example.clearlink.databinding.RvItemBinding
 import com.example.clearlink.model.UserModel
 
-class ContactListAdapter : RecyclerView.Adapter<ContactListAdapter.ViewHolder>(){
+class ContactListAdapter(var list: MutableList<UserModel>) : RecyclerView.Adapter<ContactListAdapter.ViewHolder>(){
 
-    private val list = ArrayList<UserModel>()
     private val CALL_PHONE_PERMISSION_CODE = 123
 
     interface ItemClick {
