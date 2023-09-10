@@ -73,8 +73,6 @@ class ContactListInnerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
         initView()
 
         // 더미데이터 생성
@@ -352,6 +350,7 @@ class ContactListInnerFragment : Fragment() {
                 )
 
                 listAdapter.addItem(userModel)
+                datalist.add(userModel)
             }
 
             passData(datalist.size)
