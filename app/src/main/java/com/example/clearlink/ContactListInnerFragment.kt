@@ -60,7 +60,8 @@ class ContactListInnerFragment : Fragment() {
         ContactListAdapter(datalist)
     }
     companion object {
-        private var count = -1
+        //연락처 불러오기 권한 코드
+        private const val CONTACTS_REQUEST_CODE = 3
     }
 
     override fun onCreateView(
@@ -295,7 +296,66 @@ class ContactListInnerFragment : Fragment() {
             }
         }
 
+        //연락처 불러오기 버튼
+        contactListInnerFragmentAddcontactListBtn.setOnClickListener {
+            // 연락처 읽기 권한 확인 및 요청
+            if (ContextCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.READ_CONTACTS
+                ) == PackageManager.PERMISSION_GRANTED
+            ) {
+                loadContacts()
+            } else {
+                ActivityCompat.requestPermissions(
+                    requireActivity(),
+                    arrayOf(Manifest.permission.READ_CONTACTS),
+                    CONTACTS_REQUEST_CODE
+                )
+            }
+        }
+
     }
+
+    private fun loadContacts() {
+        val contactsList = mutableListOf<String>()
+
+        val cursor = requireContext().contentResolver.query(
+            ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+            null,
+            null,
+            null,
+            null
+        )
+
+        cursor?.use {
+            while (it.moveToNext()) {
+                val contactNameColumnIndex = it.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)
+                val phoneNumberColumnIndex = it.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)
+
+                val contactName = if (contactNameColumnIndex != -1) it.getString(contactNameColumnIndex) ?: "" else ""
+                val phoneNumber = if (phoneNumberColumnIndex != -1) it.getString(phoneNumberColumnIndex) ?: "" else ""
+
+                // 이름과 전화번호 이외에는 안받아오는것으로 설정
+                val userModel = UserModel(
+                    profileImg = null,
+                    name = contactName,
+                    phoneNumber = phoneNumber,
+                    email = "",
+                    favoritesImg = 0,
+                    favorites = false,
+                    memo = "",
+                    event = 0
+                )
+
+                listAdapter.addItem(userModel)
+                datalist.add(userModel)
+            }
+
+            passData(datalist.size)
+        }
+        cursor?.close()
+    }
+
 
     override fun onDestroyView() {
         _binding = null
