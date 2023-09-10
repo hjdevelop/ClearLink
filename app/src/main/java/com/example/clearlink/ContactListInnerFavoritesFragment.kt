@@ -30,7 +30,7 @@ class ContactListInnerFavoritesFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val listAdapter by lazy {
-        ContactListAdapter(testList)
+        ContactListAdapter()
     }
 
     override fun onCreateView(
