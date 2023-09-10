@@ -44,13 +44,12 @@ class ContactDetailFragment : AppCompatActivity() {
         }
 
         //메세지 보내기 버튼
-
         val messageButton = findViewById<Button>(R.id.contact_detail_fragment_btn_message)
 
         messageButton.setOnClickListener {
             val phoneNumber = item.phoneNumber
 
-            // SEND_SMS 권한을 확인합니다.
+            // SEND_SMS 권한을 확인
             if (ContextCompat.checkSelfPermission(
                     this,
                     Manifest.permission.SEND_SMS
@@ -63,11 +62,11 @@ class ContactDetailFragment : AppCompatActivity() {
                     MESSAGE_REQUEST_CODE
                 )
             } else {
-                // 권한이 이미 허용된 경우 메시지를 보내기 위한 Intent를 생성합니다.
+                // 권한이 이미 허용된 경우 메시지를 보내기 위한 Intent를 생성
                 val intent = Intent(Intent.ACTION_SENDTO)
-                intent.data = Uri.parse("smsto:$phoneNumber") // smsto: 프로토콜을 사용하여 SMS 메시지를 보냅니다
+                intent.data = Uri.parse("smsto:$phoneNumber") // smsto: 프로토콜을 사용하여 SMS 메시지를 보내기
 
-                // 메시지를 보내기 위한 액티비티를 시작합니다.
+                // 메시지를 보내기 위한 액티비티를 시작
                 startActivity(intent)
             }
         }
@@ -106,17 +105,17 @@ class ContactDetailFragment : AppCompatActivity() {
             val subject = "제목"
             val message = "이메일 내용"
 
-            // 이메일 앱을 열기 위한 Intent를 생성합니다.
+            // 이메일 앱을 열기 위한 Intent를 생성
             val emailIntent = Intent(Intent.ACTION_SENDTO)
             emailIntent.data = Uri.parse("mailto:${item.email}") // 이메일 앱을 열기 위한 Uri
 
-            // 수신자 이메일 주소, 제목 및 내용을 추가합니다.
+            // 수신자 이메일 주소, 제목 및 내용을 추가
             emailIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(recipient))
             emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject)
             emailIntent.putExtra(Intent.EXTRA_TEXT, message)
 
             try {
-                // 이메일 앱을 엽니다.
+                // 이메일 앱을 실행
                 startActivity(emailIntent)
             } catch (e: ActivityNotFoundException) {
                 Toast.makeText(this, "이메일 앱이 설치되어 있지 않습니다.", Toast.LENGTH_SHORT).show()

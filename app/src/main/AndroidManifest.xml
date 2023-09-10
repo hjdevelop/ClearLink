@@ -19,6 +19,9 @@
     <!-- 메세지 권한 -->
     <uses-permission android:name="android.permission.SEND_SMS" />
 
+    <!-- 연락처 불러오기 권한 -->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
     <!-- addContactDialog 알림 권한 -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <!-- addContactDialog 갤러리 권한 -->
