@@ -54,7 +54,6 @@ class ContactListInnerFavoritesFragment : Fragment() {
 //                }
 //            }
 
-
         setFragmentResultListener("requestKey") { requestKey, bundle ->
             val itemList = bundle.getParcelableArrayList<UserModel>("item")!!
             Log.d("FitemList", itemList.toString())
