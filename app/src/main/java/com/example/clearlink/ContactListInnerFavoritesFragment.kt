@@ -13,6 +13,7 @@ import androidx.fragment.app.setFragmentResultListener
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.clearlink.ContactListInnerFragment.Companion.deleteList
 import com.example.clearlink.adapter.ContactListAdapter
 import com.example.clearlink.databinding.FragmentContactListInnerFavoritesBinding
 import com.example.clearlink.model.UserModel
@@ -23,6 +24,7 @@ class ContactListInnerFavoritesFragment : Fragment() {
         fun newInstance() = ContactListInnerFavoritesFragment()
         val testList = arrayListOf<UserModel>()
         var sendList = arrayListOf<UserModel>()
+        val testSet = mutableSetOf<UserModel>()
     }
 
     private var _binding: FragmentContactListInnerFavoritesBinding? = null
@@ -46,13 +48,27 @@ class ContactListInnerFavoritesFragment : Fragment() {
 
         initView()
 
-//        setFragmentResultListener("deleteKey") { deleteKey, bundle ->
-//                val item = bundle.getParcelable<UserModel>("item")
-//                if (item != null) {
-//                    val position = testList.indexOf(item)
-//                    listAdapter.deleteItem(position)
-//                }
-//            }
+        setFragmentResultListener("deleteKey") { deleteKey, bundle ->
+                val item = bundle.getParcelable<UserModel>("item")
+
+                for ( i in 0 until deleteList.size) {
+                    testSet.add(deleteList[i])
+                }
+
+
+
+
+
+
+
+                deleteList.clear()
+
+
+                if (item != null) {
+                    val position = testList.indexOf(item)
+                    listAdapter.deleteItem(position)
+                }
+            }
 
         setFragmentResultListener("requestKey") { requestKey, bundle ->
             val itemList = bundle.getParcelableArrayList<UserModel>("item")!!
