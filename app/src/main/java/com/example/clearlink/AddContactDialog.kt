@@ -87,7 +87,7 @@ class AddContactDialog : DialogFragment() {
             val memo = binding.addContactDialogMemoEditText.text.toString()
 
             if(imageUri == null){
-                val UserProfile = UserModel(Uri.parse("android.resource://" + context?.packageName + "/" + R.drawable.ic_mypage), name, phonenumber, email, R.drawable.ic_star, false, memo, checkedEvent)
+                val UserProfile = UserModel(Uri.parse("android.resource://" + context?.packageName + "/" + R.drawable.ic_blueprofile), name, phonenumber, email, R.drawable.ic_star, false, memo, checkedEvent)
                 DialogResult?.finish(UserProfile)
             }else{
                 val UserProfile = UserModel(imageUri, name, phonenumber, email, R.drawable.ic_star, false, memo, checkedEvent)
