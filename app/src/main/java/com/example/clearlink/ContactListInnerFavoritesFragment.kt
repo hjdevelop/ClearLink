@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.collection.arraySetOf
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
@@ -46,13 +47,11 @@ class ContactListInnerFavoritesFragment : Fragment() {
 
         initView()
 
-//        setFragmentResultListener("deleteKey") { deleteKey, bundle ->
-//                val item = bundle.getParcelable<UserModel>("item")
-//                if (item != null) {
-//                    val position = testList.indexOf(item)
-//                    listAdapter.deleteItem(position)
-//                }
-//            }
+        setFragmentResultListener("deleteKey") { deleteKey, bundle ->
+            val item = bundle.getParcelable<UserModel>("item")!!
+
+            listAdapter.deleteFItem(item)
+        }
 
         setFragmentResultListener("requestKey") { requestKey, bundle ->
             val itemList = bundle.getParcelableArrayList<UserModel>("item")!!
@@ -121,7 +120,8 @@ class ContactListInnerFavoritesFragment : Fragment() {
     private fun initView() = with(binding) {
 
         contactListInnerFavoritesFragmentRecyclerview.adapter = listAdapter
-        contactListInnerFavoritesFragmentRecyclerview.layoutManager = GridLayoutManager(requireContext(), 1)
+        contactListInnerFavoritesFragmentRecyclerview.layoutManager =
+            GridLayoutManager(requireContext(), 1)
         contactListInnerFavoritesFragmentRecyclerview.addItemDecoration(
             DividerItemDecoration(
                 contactListInnerFavoritesFragmentRecyclerview.context,
